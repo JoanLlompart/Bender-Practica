@@ -1,5 +1,6 @@
 public class Robot {
     // hemm de guardar la posicio inicial.
+    int posInicial;
     int x;
     int y;
 
