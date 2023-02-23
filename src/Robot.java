@@ -1,4 +1,9 @@
 public class Robot {
+    Robot (int x,int y) {
+        this.x=x;
+        this.y=y;
+
+    }
     // hemm de guardar la posicio inicial.
     int posInicial;
     int x;

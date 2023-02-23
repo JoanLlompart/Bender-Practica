@@ -68,22 +68,20 @@ public class Bender {
             //Antes de crear el robot hem de sebre quina posicio inicial te en el mapa
            //Bucle que averigua la posicio inicial
 
-            trobaPosInicial(planol);
+            int[] cordInicial = trobaPosInicial(planol);
 
-            Robot robot = new Robot();
+            Robot robot = new Robot(cordInicial[0],cordInicial[1]);
 
 
 
             return null; }
 
-    private void trobaPosInicial(String[][] planol) {
+    private int[] trobaPosInicial(String[][] planol) {
 
         for (int xPos = 0; xPos < planol.length; xPos++) {
             for (int yPos = 0; yPos < planol[xPos].length; yPos++) {
                 if (yPos == 'X') {
-                    int Y = yPos;
-                    int X = xPos;
-                    return Y,X;
+
                     break;
                 }else continue;
             }
