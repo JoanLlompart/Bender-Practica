@@ -10,13 +10,20 @@ public class Robot {
     int y;
 
     //direccions amb enum millor
-    char sud = 'S';
+    enum direccio {
+        SUD,
+        EAST,
+        NORTH,
+        WEST
 
-    char east = 'E';
+    }
+    //char sud = 'S';
 
-    char north = 'N';
+    //char east = 'E';
 
-    char west = 'W';
+    //char north = 'N';
+
+   // char west = 'W';
     boolean haArribat = false;
 
     void walk() {
