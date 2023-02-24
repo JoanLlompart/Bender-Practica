@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 public class Bender {
 
-    char[][] planol;
+    char[][] plano;
 
     public static void main(String[] args) {
         String mapa = "" +
@@ -44,14 +44,14 @@ public class Bender {
         String[] posicio = mapa.split("\n");
         int filasN = posicio.length;
         int colN = posicio[0].length();
-        planol = new char[filasN][colN];
+        plano = new char[filasN][colN];
 
 
         //Rellena el Array amb els valors de el String
         for (int x = 0; x < posicio.length; x++) {
             for (int y = 0; y < posicio[x].length(); y++) {
                 //Un bucle per cada posicio de X i el altre per Y
-                planol[x][y] = posicio[x].charAt(y);
+                plano[x][y] = posicio[x].charAt(y);
             }
         }
     }
@@ -71,32 +71,67 @@ public class Bender {
 
         int[] cordInicial = new int[2];
         //Cridam a la funcio que pasant el planol torna un array amb les cordenades.
-        trobaPosInicial(planol, cordInicial);
+        trobaPosInicial(plano, cordInicial);
         System.out.println(Arrays.toString(cordInicial));
 
+        //Cream el Robot i li pasa, les cordenades inicials.
         Robot robot = new Robot(cordInicial[0], cordInicial[1]);
 
 
+        //Cream un item
+        Item item = new Item();
 
         return null;
     }
 
     private int[] trobaPosInicial(char[][] planol, int[] cord) {
+/*
+// Buscar dentro de mapaChars donde esta la X
+        // (doble for)
+        int pix = 0;
+        int piy = 0;
+        int p$x = 0;
+        int p$y = 0;
+        String resultado = null;
+        int posRobot = 0;
+        for (int i = 0; i < mapaChars.length; i++) {
+            for (int j = 0; j < mapaChars[0].length; j++) {
+                if (mapaChars[i][j] == 'X'){
+                    pix = i;
+                    piy = j;
+                    System.out.println(mapaChars[i][j]);
+                    System.out.println(pix + " " + piy);
+                }
+                if (mapaChars[i][j] == '$'){
+                    p$x = i;
+                    p$y = j;
+                    System.out.println(mapaChars[i][j]);
+                }
+            }
+        }
 
+        boolean comparacion = comparacion(piy, pix, p$y, p$x);
+        while (mapaChars[piy][pix] != '#' || !comparacion){
+            piy += 1;
+            resultado += "S";
+
+        }
+ */
         for (int xPos = 0; xPos < planol.length; xPos++) {
             for (int yPos = 0; yPos < planol[xPos].length; yPos++) {
                 if (planol[xPos][yPos] =='X') {
-                    System.out.println("ha entrat");
                     cord[0] = xPos;
                     cord[1] = yPos;
                     return cord;
                 }
             }
         }
+
         return null;
     }
 
     int bestRun() {
+
 
         return 0;
     }

@@ -1,22 +1,21 @@
 public class Robot {
     Robot (int x,int y) {
-        this.x=x;
-        this.y=y;
-
+        this.x = x;
+        this.y = y;
     }
-    // hemm de guardar la posicio inicial.
+    // hem de guardar la posicio inicial.
     int posInicial;
     int x;
     int y;
 
-    //direccions amb enum millor
-    enum direccio {
+    //Orientacions (S,E,N,W)
+    enum orientacio {
         SUD,
         EAST,
         NORTH,
-        WEST
-
+        WEST;
     }
+
     //char sud = 'S';
 
     //char east = 'E';
@@ -28,7 +27,10 @@ public class Robot {
 
     void walk() {
         //ha de cambiar la seva posicio si pot.
-        // si la posicio esta lliure podem avançar i cambiara la posicio de X i Y
+        // si la posicio esta lliure podem avançar i cambiara la posicio de X i Y.
+
+
+
     }
 
 }
