@@ -1,8 +1,10 @@
-public class Item {
+public abstract class Item {
 
+}
 class ParetItem extends Item {
 
 }
+
 
 class ObjectiuItem extends Item{
     //trobar el '$'
@@ -12,6 +14,7 @@ class ObjectiuItem extends Item{
 }
 class ComençaItem extends Item {
     //posicio inicial de el robot
+
 
 
 

@@ -1,10 +1,11 @@
 public class Robot {
-    Robot (int x,int y) {
-        this.x = x;
+    Robot (int y,int x) {
         this.y = y;
+        this.x = x;
+
     }
     // hem de guardar la posicio inicial.
-    int posInicial;
+    int[] posInicial = new int[2];
     int x;
     int y;
 
