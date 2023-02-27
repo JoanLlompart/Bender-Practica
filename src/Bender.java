@@ -3,6 +3,20 @@ import java.util.Arrays;
 public class Bender {
 
     char[][] plano;
+    int iniciX = 0;
+    int iniciY = 0;
+    int finalX = 0;
+    int finalY = 0;
+    String resultat = "";
+
+    public Bender(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano) {
+        this.plano = plano;
+        this.iniciX = iniciX;
+        this.iniciY = iniciY;
+        this.finalX = finalX;
+        this.finalY = finalY;
+        this.resultat = resultat;
+    }
 
     public static void main(String[] args) {
         String mapa = "" +
@@ -121,7 +135,7 @@ public class Bender {
 
         //return new Bender();
 
-        return resultat;
+        return robot.walk();
     }
 
     private void trobaPosInicial(char[][] plano, int[] cordInicial,int[] cordFinal) {

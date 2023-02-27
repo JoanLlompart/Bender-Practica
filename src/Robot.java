@@ -1,5 +1,6 @@
 public class Robot extends Bender{
 
+    /*
     private int iniciX = 0;
     private int iniciY = 0;
     private int finalX = 0;
@@ -9,15 +10,13 @@ public class Robot extends Bender{
 
 
 
+     */
+
+
+
     // hem de guardar la posicio inicial.
     public Robot(int iniciX, int iniciY, int finalX, int finalY, String resultat,char[][] plano) {
-        this.iniciX = iniciX;
-        this.iniciY = iniciY;
-        this.finalX = finalX;
-        this.finalY = finalY;
-        this.resultat = resultat;
-        this.plano = plano;
-
+        super(iniciX,iniciY,finalX,finalY,resultat,plano);
     }
 
 
@@ -52,12 +51,13 @@ public class Robot extends Bender{
     }
 
 
-   public void walk() {
+   public String  walk() {
         //ha de cambiar la seva posicio si pot.
         // si la posicio esta lliure podem avançar i cambiara la posicio de X i Y.
         while (plano[iniciY][iniciX] != '#' || comparacion){
             iniciX += 1;
             resultat += orientacio.S.name();
         }
+        return resultat;
     }
 }
