@@ -16,8 +16,9 @@ public class Bender {
                 "#######";
 
         Bender b = new Bender(mapa);
+        System.out.println(b);
 
-
+/*
         String[][] plano = new String[][]{mapa.split("\n")};
         for (int y = 0;y  < plano.length; y++) {
             for (int x = 0; x < plano[y].length; x++) {
@@ -26,6 +27,8 @@ public class Bender {
             }
         }
 
+
+ */
 
 
 
@@ -57,6 +60,7 @@ public class Bender {
     }
 
 
+
     // Navegar fins a l'objectiu («$»).
     // El valor retornat pel mètode consisteix en una cadena de
     // caràcters on cada lletra pot tenir
@@ -82,18 +86,22 @@ public class Bender {
         int iniciY = cordInicial[1];
         int finalX = cordFinal[0];
         int finalY = cordFinal[1];
-
-
-        //Cream el Robot i li pasa, les cordenades inicials.
-        Robot robot = new Robot(iniciX,iniciY,finalX,finalY);
         String resultat="";
 
-        boolean comparacion = comparacion(iniciY, iniciX, finalY, finalX);
+        //Cream el Robot i li pasa, les cordenades inicials.
+        Robot robot = new Robot(iniciX,iniciY,finalX,finalY,resultat,plano);
+
+
+/*
+        boolean comparacion = haArribat(iniciY, iniciX, finalY, finalX);
 
         while (plano[iniciY][iniciX] != '#' || comparacion){
             iniciX += 1;
             resultat += "S";
         }
+
+
+ */
 
 
         System.out.println("X :" + iniciX + "| Y =  "+ iniciY);
@@ -108,6 +116,10 @@ public class Bender {
 
         //Cream un item
         //Item item = new Item();
+
+        //return resultat;
+
+        //return new Bender();
 
         return resultat;
     }
@@ -172,7 +184,7 @@ public class Bender {
         }
     }
 
-    private boolean comparacion(int y1, int x1, int y2, int x2) {
+    private boolean haArribat(int y1, int x1, int y2, int x2) {
         return y2 == y1 && x2 == x1;
 
     }
