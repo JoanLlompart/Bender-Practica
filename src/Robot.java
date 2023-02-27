@@ -1,13 +1,13 @@
 public class Robot {
-    Robot (int y,int x) {
-        this.y = y;
-        this.x = x;
 
-    }
     // hem de guardar la posicio inicial.
-    int[] posInicial = new int[2];
     int x;
     int y;
+
+    public Robot(int iniciX, int iniciY, int finalX, int finalY) {
+
+    }
+
 
     //Orientacions (S,E,N,W)
     enum orientacio {

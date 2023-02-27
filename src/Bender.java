@@ -18,11 +18,11 @@ public class Bender {
         Bender b = new Bender(mapa);
 
 
-        String[][] planol = new String[][]{mapa.split("\n")};
-        for (int i = 0; i < planol.length; i++) {
-            for (int j = 0; j < planol[i].length; j++) {
+        String[][] plano = new String[][]{mapa.split("\n")};
+        for (int y = 0;y  < plano.length; y++) {
+            for (int x = 0; x < plano[y].length; x++) {
                 //Un bucle per cada posicio de X i el altre per Y
-                System.out.println(Arrays.toString(planol[i][j].toCharArray()));
+                System.out.println(Arrays.toString(plano[y][x].toCharArray()));
             }
         }
 
@@ -78,19 +78,41 @@ public class Bender {
         //Cridam a la funcio que pasant el planol torna un array amb les cordenades.
         trobaPosInicial(plano, cordInicial,cordFinal);
 
-        System.out.println(Arrays.toString(cordInicial));
+        int iniciX = cordInicial[0];
+        int iniciY = cordInicial[1];
+        int finalX = cordFinal[0];
+        int finalY = cordFinal[1];
+
 
         //Cream el Robot i li pasa, les cordenades inicials.
-        Robot robot = new Robot(cordInicial[0], cordInicial[1]);
+        Robot robot = new Robot(iniciX,iniciY,finalX,finalY);
+        String resultat="";
+
+        boolean comparacion = comparacion(iniciY, iniciX, finalY, finalX);
+
+        while (plano[iniciY][iniciX] != '#' || comparacion){
+            iniciX += 1;
+            resultat += "S";
+        }
+
+
+        System.out.println("X :" + iniciX + "| Y =  "+ iniciY);
+
+        System.out.println(" final X :" + finalX + "| final  Y =  "+ finalY);
+
+        //ObjectiuItem objectiu = new ObjectiuItem();
+
+
+        System.out.println(Arrays.toString(cordInicial));
 
 
         //Cream un item
         //Item item = new Item();
 
-        return null;
+        return resultat;
     }
 
-    private int[] trobaPosInicial(char[][] plano, int[] cordInicial,int[] cordFinal) {
+    private void trobaPosInicial(char[][] plano, int[] cordInicial,int[] cordFinal) {
 /*        // Buscar dentro de mapaChars donde esta la X
         // (doble for)
         int pix = 0;
@@ -134,21 +156,20 @@ public class Bender {
             //Segon bucle per trobar la cordenada X columna
             for (int posCol = 0; posCol < plano[posFila].length; posCol++) {
                 if (plano[posFila][posCol] =='X') {
-                    cordInicial[0] = posFila;
-                    cordInicial[1] = posCol;
+                    cordInicial[0] = posCol;
+                    cordInicial[1] = posFila;
+
                     //return cordInici;
                 }
                 if (plano[posFila][posCol] == '$') {
-                    cordFinal[0] = posFila;
-                    cordFinal[1] = posCol;
+                    cordFinal[0] = posCol;
+                    cordFinal[1] = posFila;
+
                     //per deixar de recorre el mapa i optimitzar el programa.
                     break;
                 }
             }
         }
-
-
-        return null;
     }
 
     private boolean comparacion(int y1, int x1, int y2, int x2) {
