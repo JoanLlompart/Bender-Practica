@@ -43,21 +43,58 @@ public class Robot extends Bender{
 
 
     // haArribat variable boolean.
-    boolean haArribat = false;
+    //boolean haArribat = false;
     boolean comparacion = haArribat(iniciY, iniciX, finalY, finalX);
 
-    private boolean haArribat(int iniciY, int iniciX, int finalY, int finalX) {
+    public boolean haArribat(int iniciY, int iniciX, int finalY, int finalX) {
         return finalY == iniciY && finalX == iniciX;
     }
 
 
-   public String  walk() {
+
+
+    private void dirreccions(int iniciY, int iniciX,orientacio orientacio) {
+
+        switch (orientacio) {
+            case S -> iniciY += 1;
+            case E -> iniciX += 1;
+            case N -> iniciY -= 1;
+            case W -> iniciX -= 1;
+        }
+    }
+
+    public String  walk() {
         //ha de cambiar la seva posicio si pot.
         // si la posicio esta lliure podem avançar i cambiara la posicio de X i Y.
-        while (plano[iniciY][iniciX] != '#' || comparacion){
-            iniciX += 1;
-            resultat += orientacio.S.name();
+       int cont =0;
+       if (finalX==iniciX) {
+           while (!(iniciY ==finalY)) {
+               iniciY++;
+               resultat += orientacio.S.name();
+           }
+       }
+       while (plano[iniciY][iniciX] == '#') {
+
+       }
+
+
+        /*while (plano[iniciY][iniciX] != '#'|| comparacion){
+                iniciY += 1;
+                resultat += orientacio.S.name();
         }
+
+         */
+
+
+
+
+        /*while (plano[iniciY][iniciX] == '#'){
+            // Prioritats S (South), E (East), N (North), W (West).
+
+        }
+
+         */
         return resultat;
     }
+
 }
