@@ -53,14 +53,29 @@ public class Robot extends Bender{
 
 
 
-    private void dirreccions(int iniciY, int iniciX,orientacio orientacio) {
+    private void canviSentit(int iniciY, int iniciX,orientacio orientacio) {
 
         switch (orientacio) {
-            case S -> iniciY += 1;
-            case E -> iniciX += 1;
-            case N -> iniciY -= 1;
-            case W -> iniciX -= 1;
+            case S:
+                iniciY += 1;
+                resultat += orientacio.S.name();
+                break;
+            case E:
+                iniciX++;
+                resultat += orientacio.E.name();
+                break;
+            case N:
+                iniciY -= 1;
+                resultat += orientacio.N.name();
+                break;
+            case W:
+                resultat += orientacio.W.name();
+                iniciX -= 1;
+                break;
+
         }
+
+
     }
 
     public String  walk() {
@@ -71,20 +86,55 @@ public class Robot extends Bender{
            while (!(iniciY ==finalY)) {
                iniciY++;
                resultat += orientacio.S.name();
+               //canviSentit(iniciY,iniciX,orientacio.S);
+               //resultat += orientacio.S.name();
            }
        }
-       while (plano[iniciY][iniciX] == '#') {
-
+       if (finalY==iniciY) {
+            while (!(iniciX ==finalX)) {
+                iniciX++;
+                resultat += orientacio.E.name();
+            }
        }
 
 
-        /*while (plano[iniciY][iniciX] != '#'|| comparacion){
+       //Si no consideix cap cordenada.
+
+       while (!comparacion) {
+           //canviOrientacio(iniciY,iniciX,cont);
+           if(plano[iniciY][iniciX] =='#') {
+               //Amb el contador cridarem a una funcio amb un switch canviOrientacio que fara que avansi segons
+               // la preferencia de el programa
+               //canviSentit(iniciY,iniciX,orientacio.E);
+               cont++;
+               canviOrientacio(iniciY,iniciX,cont);
+           } else {
+               System.out.println("Seguir mateixa direcció ");
+               break;
+           }
+           //iniciX += 1;
+           //resultat += orientacio.E.name();
+
+
+       }
+
+     /*  while (plano[iniciY][iniciX] != '#') {
+           canviSentit(iniciY,iniciX,orientacio.E);
+           if (plano[iniciY][iniciX] =='#') {
+               canviSentit(iniciY,iniciX,orientacio.N);
+           }
+
+
+       }
+
+      */
+
+
+     /*   while (plano[iniciY][iniciX] != '#'|| comparacion){
                 iniciY += 1;
                 resultat += orientacio.S.name();
         }
-
-         */
-
+      */
 
 
 
@@ -95,6 +145,19 @@ public class Robot extends Bender{
 
          */
         return resultat;
+    }
+
+    private void canviOrientacio(int iniciY, int iniciX, int cont) {
+        switch (cont) {
+            case 0:
+                iniciY++;
+                resultat += orientacio.S.name();
+                break;
+            case 1:
+                iniciX += 1;
+                resultat += orientacio.E.name();
+                break;
+        }
     }
 
 }

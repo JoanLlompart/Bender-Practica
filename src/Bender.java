@@ -25,8 +25,8 @@ public class Bender {
                 "#     #\n" +
                 "#     #\n" +
                 "#     #\n" +
-                "# $   #\n" +
                 "#     #\n" +
+                "#   $ #\n" +
                 "#######";
 
         Bender b = new Bender(mapa);
