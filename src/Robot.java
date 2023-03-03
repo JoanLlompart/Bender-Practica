@@ -1,20 +1,8 @@
 public class Robot extends Bender {
 
-    /*
-    private int iniciX = 0;
-    private int iniciY = 0;
-    private int finalX = 0;
-    private int finalY = 0;
-    private String resultat = "";
-    private char[][] plano;
-
-
-
-     */
-
-
     // hem de guardar la posicio inicial.
     public Robot(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano) {
+        //Constructor crida a el contructor de Bender
         super(iniciX, iniciY, finalX, finalY, resultat, plano);
     }
 
@@ -256,32 +244,6 @@ public class Robot extends Bender {
  */
 
 //------------------------------------------------------------
-     /*  while (plano[iniciY][iniciX] != '#') {
-           canviSentit(iniciY,iniciX,orientacio.E);
-           if (plano[iniciY][iniciX] =='#') {
-               canviSentit(iniciY,iniciX,orientacio.N);
-           }
-
-
-       }
-
-      */
-
-
-     /*   while (plano[iniciY][iniciX] != '#'|| comparacion){
-                iniciY += 1;
-                resultat += orientacio.S.name();
-        }
-      */
-
-
-
-        /*while (plano[iniciY][iniciX] == '#'){
-            // Prioritats S (South), E (East), N (North), W (West).
-
-        }
-
-         */
 
 /*
         private void canviOrientacio ( int iniciY, int iniciX, int cont){
