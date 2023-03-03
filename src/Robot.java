@@ -1,4 +1,4 @@
-public class Robot extends Bender{
+public class Robot extends Bender {
 
     /*
     private int iniciX = 0;
@@ -13,15 +13,14 @@ public class Robot extends Bender{
      */
 
 
-
     // hem de guardar la posicio inicial.
-    public Robot(int iniciX, int iniciY, int finalX, int finalY, String resultat,char[][] plano) {
-        super(iniciX,iniciY,finalX,finalY,resultat,plano);
+    public Robot(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano) {
+        super(iniciX, iniciY, finalX, finalY, resultat, plano);
     }
 
 
     //Orientacions (S,E,N,W)
-    enum orientacio {
+    enum Orientacio {
         // SUD
         S,
         //EAST
@@ -39,7 +38,7 @@ public class Robot extends Bender{
 
     //char north = 'N';
 
-   // char west = 'W';
+    // char west = 'W';
 
 
     // haArribat variable boolean.
@@ -51,9 +50,7 @@ public class Robot extends Bender{
     }
 
 
-
-
-    private void canviSentit(int iniciY, int iniciX,orientacio orientacio) {
+    private void canviSentit(int iniciY, int iniciX, Orientacio orientacio) {
 
         switch (orientacio) {
             case S:
@@ -76,103 +73,141 @@ public class Robot extends Bender{
         }
     }
 
-    public String  walk() {
+    public String walk() {
         //ha de cambiar la seva posicio si pot.
         // si la posicio esta lliure podem avançar i cambiara la posicio de X i Y.
-       int cont =0;
+        int cont = 0;
 
-       orientacio direccio=orientacio.S;
+        Orientacio direccio = Orientacio.S;
 
-       while (!haArribat) {
-
-           orientacio orientacio = Robot.orientacio.S;
-
-           if (orientacio ==orientacio.S) {
-               //S
-               if (plano[iniciY+1][iniciX] == '#') {
-                   // Si hi ha una paret a la seguent posicio cambia de sentit
-                   direccio= orientacio.E;
-               } else if ((plano[iniciY+1][iniciX] == ' ')) {
-                   //Si esta buit podem seguir caminant cap aquella direccio
-                   iniciY++;
-                   resultat += orientacio.S.name();
+        while (!haArribat) {
 
 
-               } else if ((plano[iniciY+1][iniciX] == '$')) {
-                   //Si la seguent posiucio es '$' avança i afegeix la direccio a resulat.
+            if (direccio == Orientacio.S) {
+                //S
+                if (plano[iniciY + 1][iniciX] == '#') {
+                    // Si hi ha una paret a la seguent posicio cambia de sentit
+                    direccio = Orientacio.E;
+                } else {
+                    //Si esta buit podem seguir caminant cap aquella direccio
+                    iniciY++;
+                    resultat += Orientacio.S.name();
+                }
+            }
 
-                   iniciY++;
-                   resultat += orientacio.S.name();
-                   return resultat;
-               }
-
-
-
-
-           } else if (orientacio ==orientacio.E) {
-               //EST
-               if (plano[iniciY][iniciX+1] == '#') {
-                   //Si esta amb una paret canvi de sentit
-                   direccio= orientacio.N;
-
-
-
-               } else if (plano[iniciY][iniciX+1] == ' ') {
-                   //Si esta buit podem seguir caminant cap aquella direccio
-                   iniciX++;
-                   resultat += orientacio.E.name();
-
-               } else if ((plano[iniciY][iniciX+1] == '$')) {
-                   //Si la seguent posiucio es '$' avança i afegeix la direccio a resulat.
-
-                   iniciX++;
-                   resultat += orientacio.E.name();
-                   return resultat;
-               }
-
-           } else if (orientacio ==orientacio.N) {
-               //N
-               if (plano[iniciY-1][iniciX] == '#') {
-                   direccio= orientacio.W;
-
-               } else if ((plano[iniciY-1][iniciX] == ' ')) {
-                   //Si esta buit podem seguir caminant cap aquella direccio
-                   iniciY--;
-                   resultat += orientacio.N.name();
+            if (direccio == Orientacio.E) {
+                //EAST
+                if (plano[iniciY][iniciX + 1] == '#') {
+                    // Si hi ha una paret a la seguent posicio cambia de sentit
+                    direccio = Orientacio.N;
+                } else {
+                    //Si esta buit podem seguir caminant cap aquella direccio
+                    iniciX++;
+                    resultat += Orientacio.E.name();
+                }
+            }
 
 
-               } else if ((plano[iniciY-1][iniciX] == '$')) {
-                   //Si la seguent posiucio es '$' avança i afegeix la direccio a resulat.
+            if (direccio == Orientacio.N) {
+                //NORTH
+                if (plano[iniciY - 1][iniciX] == '#') {
+                    // Si hi ha una paret a la seguent posicio cambia de sentit
+                    direccio = Orientacio.E;
+                } else {
+                    //Si esta buit podem seguir caminant cap aquella direccio
+                    iniciY--;
+                    resultat += Orientacio.N.name();
+                }
+            }
 
-                   iniciY--;
-                   resultat += orientacio.N.name();
-                   return resultat;
-               }
-
-
-           }else if (orientacio ==orientacio.W) {
-               //W
-               if (plano[iniciY][iniciX-1] == '#') {
-                   direccio= orientacio.S;
-
-               }else if (plano[iniciY][iniciX-1] == ' ') {
-                   //Si esta buit podem seguir caminant cap aquella direccio
-                   iniciX--;
-                   resultat += orientacio.W.name();
-
-               } else if ((plano[iniciY][iniciX-1] == '$')) {
-                   //Si la seguent posiucio es '$' avança i afegeix la direccio a resulat.
-
-                   iniciX--;
-                   resultat += orientacio.W.name();
-                   return resultat;
-               }
+                if (direccio == Orientacio.W) {
+                    //WEST
+                    if (plano[iniciY][iniciX - 1] == '#') {
+                        // Si hi ha una paret a la seguent posicio cambia de sentit
+                        direccio = Orientacio.S;
+                    } else {
+                        //Si esta buit podem seguir caminant cap aquella direccio
+                        iniciX--;
+                        resultat += Orientacio.W.name();
+                    }
+                }
 
 
-           }
+                if ((plano[iniciY][iniciX] == '$')) {
+                    //Si la seguent posiucio es '$' avança i afegeix la direccio a resulat.
+                    haArribat = true;
+                }
+            }
+
+            return resultat;
+
+        }
+    }
+/*
+        } else if (orientacio == orientacio.E) {
+            //EST
+            if (plano[iniciY][iniciX + 1] == '#') {
+                //Si esta amb una paret canvi de sentit
+                direccio = orientacio.N;
 
 
-       }
+            } else if (plano[iniciY][iniciX + 1] == ' ') {
+                //Si esta buit podem seguir caminant cap aquella direccio
+                iniciX++;
+                resultat += orientacio.E.name();
+
+            } else if ((plano[iniciY][iniciX + 1] == '$')) {
+                //Si la seguent posiucio es '$' avança i afegeix la direccio a resulat.
+
+                iniciX++;
+                resultat += orientacio.E.name();
+                return resultat;
+            }
+
+        } else if (orientacio == orientacio.N) {
+            //N
+            if (plano[iniciY - 1][iniciX] == '#') {
+                direccio = orientacio.W;
+
+            } else if ((plano[iniciY - 1][iniciX] == ' ')) {
+                //Si esta buit podem seguir caminant cap aquella direccio
+                iniciY--;
+                resultat += orientacio.N.name();
+
+
+            } else if ((plano[iniciY - 1][iniciX] == '$')) {
+                //Si la seguent posiucio es '$' avança i afegeix la direccio a resulat.
+
+                iniciY--;
+                resultat += orientacio.N.name();
+                return resultat;
+            }
+
+
+        } else if (orientacio == orientacio.W) {
+            //W
+            if (plano[iniciY][iniciX - 1] == '#') {
+                direccio = orientacio.S;
+
+            } else if (plano[iniciY][iniciX - 1] == ' ') {
+                //Si esta buit podem seguir caminant cap aquella direccio
+                iniciX--;
+                resultat += orientacio.W.name();
+
+            } else if ((plano[iniciY][iniciX - 1] == '$')) {
+                //Si la seguent posiucio es '$' avança i afegeix la direccio a resulat.
+
+                iniciX--;
+                resultat += orientacio.W.name();
+                return resultat;
+            }
+
+
+ */
+
+
+
+
 
 
 
@@ -247,38 +282,39 @@ public class Robot extends Bender{
         }
 
          */
-        return resultat;
-    }
 
-    private void canviOrientacio(int iniciY, int iniciX, int cont) {
-        //int[] camina = new int[2];
-        switch (cont) {
-            case 0:
-                iniciY++;
-                //Y++;
-                resultat += orientacio.S.name();
-                break;
-            case 1:
-                iniciX += 1;
-                //X++;
-                resultat += orientacio.E.name();
-                break;
-            case 2:
-                iniciY -= 1;
-                //Y--;
-                resultat += orientacio.N.name();
-                break;
-            case 3:
-                resultat += orientacio.W.name();
-                iniciX -= 1;
-                //X++;
-                break;
+/*
+        private void canviOrientacio ( int iniciY, int iniciX, int cont){
+            //int[] camina = new int[2];
+            switch (cont) {
+                case 0:
+                    iniciY++;
+                    //Y++;
+                    resultat += Orientacio.S.name();
+                    break;
+                case 1:
+                    iniciX += 1;
+                    //X++;
+                    resultat += Orientacio.E.name();
+                    break;
+                case 2:
+                    iniciY -= 1;
+                    //Y--;
+                    resultat += Orientacio.N.name();
+                    break;
+                case 3:
+                    resultat += Orientacio.W.name();
+                    iniciX -= 1;
+                    //X++;
+                    break;
+            }
+            // camina[0] = iniciX;
+            //camina[1] = iniciY;
+            //return camina;
         }
-       // camina[0] = iniciX;
-        //camina[1] = iniciY;
-        //return camina;
+
     }
 
+ */
 
 
-}
