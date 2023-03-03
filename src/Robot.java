@@ -97,26 +97,37 @@ public class Robot extends Bender{
                    iniciY++;
                    resultat += orientacio.S.name();
 
-                  /* while (direccio == orientacio.S){
-                   }
-
-                   */
 
                } else if ((plano[iniciY+1][iniciX] == '$')) {
+                   //Si la seguent posiucio es '$' avança i afegeix la direccio a resulat.
+
                    iniciY++;
                    resultat += orientacio.S.name();
                    return resultat;
                }
 
-              // iniciY++;
+
 
 
            } else if (orientacio ==orientacio.E) {
                //EST
                if (plano[iniciY][iniciX+1] == '#') {
+                   //Si esta amb una paret canvi de sentit
                    direccio= orientacio.N;
 
 
+
+               } else if (plano[iniciY][iniciX+1] == ' ') {
+                   //Si esta buit podem seguir caminant cap aquella direccio
+                   iniciX++;
+                   resultat += orientacio.E.name();
+
+               } else if ((plano[iniciY][iniciX+1] == '$')) {
+                   //Si la seguent posiucio es '$' avança i afegeix la direccio a resulat.
+
+                   iniciX++;
+                   resultat += orientacio.E.name();
+                   return resultat;
                }
 
            } else if (orientacio ==orientacio.N) {
@@ -124,6 +135,18 @@ public class Robot extends Bender{
                if (plano[iniciY-1][iniciX] == '#') {
                    direccio= orientacio.W;
 
+               } else if ((plano[iniciY-1][iniciX] == ' ')) {
+                   //Si esta buit podem seguir caminant cap aquella direccio
+                   iniciY--;
+                   resultat += orientacio.N.name();
+
+
+               } else if ((plano[iniciY-1][iniciX] == '$')) {
+                   //Si la seguent posiucio es '$' avança i afegeix la direccio a resulat.
+
+                   iniciY--;
+                   resultat += orientacio.N.name();
+                   return resultat;
                }
 
 
@@ -131,6 +154,18 @@ public class Robot extends Bender{
                //W
                if (plano[iniciY][iniciX-1] == '#') {
                    direccio= orientacio.S;
+
+               }else if (plano[iniciY][iniciX-1] == ' ') {
+                   //Si esta buit podem seguir caminant cap aquella direccio
+                   iniciX--;
+                   resultat += orientacio.W.name();
+
+               } else if ((plano[iniciY][iniciX-1] == '$')) {
+                   //Si la seguent posiucio es '$' avança i afegeix la direccio a resulat.
+
+                   iniciX--;
+                   resultat += orientacio.W.name();
+                   return resultat;
                }
 
 
