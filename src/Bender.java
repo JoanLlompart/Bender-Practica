@@ -19,20 +19,21 @@ public class Bender {
     }
 
     public static void main(String[] args) {
-        String mapa = "" +
-                "#######\n" +
-                "# X   #\n" +
-                "#     #\n" +
-                "#     #\n" +
-                "#     #\n" +
-                "#     #\n" +
-                "#   $ #\n" +
-                "#######";
+        String mapa =  "" +
+                "###########\n" +
+                "#         #\n" +
+                "#  ########\n" +
+                "#$        #\n" +
+                "#   X     #\n" +
+                "# #####  T#\n" +
+                "#       ###\n" +
+                "#         #\n" +
+                "###########";
 
         Bender b = new Bender(mapa);
         System.out.println(b);
 
-
+/*
         String[][] plano = new String[][]{mapa.split("\n")};
         for (int y = 0;y  < plano.length; y++) {
             for (int x = 0; x < plano[y].length; x++) {
@@ -41,6 +42,8 @@ public class Bender {
             }
         }
 
+
+ */
 
 
 
@@ -92,9 +95,11 @@ public class Bender {
 
         // Arrays de cordenades final('$')
         int[] cordFinal = new int[2];
+        // Arrays de cordenades Teletransportador('T')
+        int[][] cordTele;
 
         //Cridam a la funcio que pasant el planol torna un array amb les cordenades.
-        trobaPosInicial(plano, cordInicial,cordFinal);
+        trobarItems(plano, cordInicial,cordFinal);
 
         iniciX = cordInicial[0];
         iniciY = cordInicial[1];
@@ -134,10 +139,11 @@ public class Bender {
 
         System.out.println(Arrays.toString(cordInicial));
 
+
         return robot.walk();
     }
 
-    private void trobaPosInicial(char[][] plano, int[] cordInicial,int[] cordFinal) {
+    private void trobarItems(char[][] plano, int[] cordInicial, int[] cordFinal) {
         String resultat="";
 
         // Primer bucle yPos es la fila
@@ -150,12 +156,16 @@ public class Bender {
 
                     //return cordInici;
                 }
+
                 if (plano[posFila][posCol] == '$') {
                     cordFinal[0] = posCol;
                     cordFinal[1] = posFila;
 
                     //per deixar de recorre el mapa i optimitzar el programa.
-                    break;
+                    //break;
+                }
+                if (plano[posFila][posCol] == 'T') {
+
                 }
             }
         }

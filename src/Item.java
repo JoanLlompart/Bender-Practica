@@ -1,20 +1,20 @@
-public class Item {
-/*
-    public final char[][] plano;
-    private final int[] cordInicial;
-    private final int[] cordFinal;
+public class Item extends Robot{
+
+   // public final char[][] plano;
+    //private final int[] cordInicial;
+   // private final int[] cordFinal;
 
 
-    public Item(char[][] plano, int[] cordInicial, int[] cordFinal) {
-        this.plano = plano;
-        this.cordInicial = cordInicial;
-        this.cordFinal = cordFinal;
+    public Item(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano) {
+        super(iniciX, iniciY, finalX, finalY, resultat, plano);
     }
-
- */
 }
+/*
 class ParetItem extends Item {
 
+    public ParetItem(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano, char[][] plano1, int[] cordInicial, int[] cordFinal) {
+        super(iniciX, iniciY, finalX, finalY, resultat, plano, plano1, cordInicial, cordFinal);
+    }
 }
 
 
@@ -50,7 +50,8 @@ class ObjectiuItem extends Item{
 
  */
 
-}
+//}
+/*
 class ComençaItem extends Item {
     //posicio inicial de el robot
 
@@ -60,9 +61,17 @@ class ComençaItem extends Item {
 }
 class Inversor extends Item {
 
+
 }
 
+
+ */
+
 class Transportador extends Item {
+
+    public Transportador(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano) {
+        super(iniciX, iniciY, finalX, finalY, resultat, plano);
+    }
 
 }
 

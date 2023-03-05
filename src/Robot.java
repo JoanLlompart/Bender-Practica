@@ -15,7 +15,6 @@ public class Robot extends Bender {
         E,
         // NORTH
         N,
-
         //WEST
         W;
     }
@@ -61,6 +60,12 @@ public class Robot extends Bender {
         }
     }
 
+
+
+    public void setHaArribat(boolean haArribat) {
+        this.haArribat = haArribat;
+    }
+
     public String walk() {
         //ha de cambiar la seva posicio si pot.
         // si la posicio esta lliure podem avançar i cambiara la posicio de X i Y.
@@ -69,7 +74,7 @@ public class Robot extends Bender {
         int cont = 0;
         boolean potAnarAlSud = true;
         Orientacio direccio = Orientacio.S;
-
+        //direccio = Orientacio.S;
         while (!haArribat) {
 
             // El probrama cada vegada que troba una paret ha de tornar a comensar el ordre cap el sur.
@@ -78,12 +83,10 @@ public class Robot extends Bender {
             if (direccio == Orientacio.S) {
                 //S
                 if (plano[iniciY + 1][iniciX] == '#') {
-                   //potAnarDireccio(plano, iniciY, iniciX, direccio);
-                    //cont=1;
                     // Si hi ha una paret a la seguent posicio cambia de sentit
-                    //canviOrientacio(direccio,cont);
-                    direccio = Orientacio.E;
 
+                    Orientacio novaDireccio = potAnarDireccio(plano, iniciY, iniciX, direccio);
+                    direccio = novaDireccio;
 
                 } else {
                     //Si esta buit podem seguir caminant cap aquella direccio
@@ -98,8 +101,12 @@ public class Robot extends Bender {
                     // Si hi ha una paret a la seguent posicio cambia de sentit
                     //cont = 2;
                     //canviOrientacio(direccio, cont);
-                    direccio = Orientacio.N;
-                    //potAnarDireccio(plano, iniciY, iniciX, direccio);
+                    //direccio = Orientacio.N;
+                    //direccio = potAnarDireccio(plano, iniciY, iniciX, direccio);
+
+
+                    Orientacio novaDireccio = potAnarDireccio(plano, iniciY, iniciX, direccio);
+                    direccio = novaDireccio;
 
                 } else {
                     //Si esta buit podem seguir caminant cap aquella direccio
@@ -115,8 +122,14 @@ public class Robot extends Bender {
                     //cont = 3;
                     //canviOrientacio(direccio, cont);
                     // Si hi ha una paret a la seguent posicio cambia de sentit
-                    direccio = Orientacio.W;
-                    //potAnarDireccio(plano, iniciY, iniciX, direccio);
+                    //direccio = Orientacio.W;
+                   // direccio = potAnarDireccio(plano, iniciY, iniciX, direccio);
+
+                    Orientacio novaDireccio = potAnarDireccio(plano, iniciY, iniciX, direccio);
+                    direccio = novaDireccio;
+
+
+
                 } else {
                     //Si esta buit podem seguir caminant cap aquella direccio
                     iniciY--;
@@ -130,8 +143,13 @@ public class Robot extends Bender {
                     //cont = 4;
                     //canviOrientacio(direccio, cont);
                     // Si hi ha una paret a la seguent posicio cambia de sentit
-                    direccio = Orientacio.S;
-                    //potAnarDireccio(plano, iniciY, iniciX, direccio);
+                    //direccio = Orientacio.S;
+                    //direccio = potAnarDireccio(plano, iniciY, iniciX, direccio);
+
+                    Orientacio novaDireccio = potAnarDireccio(plano, iniciY, iniciX, direccio);
+                    direccio = novaDireccio;
+
+
                 } else {
                     //Si esta buit podem seguir caminant cap aquella direccio
                     iniciX--;
@@ -145,22 +163,24 @@ public class Robot extends Bender {
                 haArribat = true;
             }
         }
+
         return resultat;
 
     }
 
-    private Orientacio potAnarDireccio(char[][] plano, int iniciY, int iniciX, Orientacio direccio) {
+    public Orientacio potAnarDireccio(char[][] plano, int iniciY, int iniciX, Orientacio direccio) {
         // Si hi ha una paret a la seguent posicio, busca primer cap al sud
 
         //ordre S,E,N,W
         if (plano[iniciY + 1][iniciX] != '#') {
-            direccio = Orientacio.S;
+            return direccio = Orientacio.S;
         } else if (plano[iniciY][iniciX + 1] != '#') {
-            direccio = Orientacio.E;
-        } else if (plano[iniciY][iniciX - 1] != '#') {
-            direccio = Orientacio.W;
+            return direccio = Orientacio.E;
         } else if (plano[iniciY - 1][iniciX] != '#') {
-            direccio = Orientacio.N;
+           return direccio = Orientacio.N;
+
+        }else if (plano[iniciY][iniciX - 1] != '#') {
+            return direccio = Orientacio.W;
         }
         return direccio;
     }
