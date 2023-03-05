@@ -64,18 +64,27 @@ public class Robot extends Bender {
     public String walk() {
         //ha de cambiar la seva posicio si pot.
         // si la posicio esta lliure podem avançar i cambiara la posicio de X i Y.
-        int cont = 0;
 
+
+        int cont = 0;
+        boolean potAnarAlSud = true;
         Orientacio direccio = Orientacio.S;
 
         while (!haArribat) {
 
+            // El probrama cada vegada que troba una paret ha de tornar a comensar el ordre cap el sur.
 
+            cont = 0;
             if (direccio == Orientacio.S) {
                 //S
                 if (plano[iniciY + 1][iniciX] == '#') {
+                   //potAnarDireccio(plano, iniciY, iniciX, direccio);
+                    //cont=1;
                     // Si hi ha una paret a la seguent posicio cambia de sentit
+                    //canviOrientacio(direccio,cont);
                     direccio = Orientacio.E;
+
+
                 } else {
                     //Si esta buit podem seguir caminant cap aquella direccio
                     iniciY++;
@@ -87,7 +96,11 @@ public class Robot extends Bender {
                 //EAST
                 if (plano[iniciY][iniciX + 1] == '#') {
                     // Si hi ha una paret a la seguent posicio cambia de sentit
+                    //cont = 2;
+                    //canviOrientacio(direccio, cont);
                     direccio = Orientacio.N;
+                    //potAnarDireccio(plano, iniciY, iniciX, direccio);
+
                 } else {
                     //Si esta buit podem seguir caminant cap aquella direccio
                     iniciX++;
@@ -99,8 +112,11 @@ public class Robot extends Bender {
             if (direccio == Orientacio.N) {
                 //NORTH
                 if (plano[iniciY - 1][iniciX] == '#') {
+                    //cont = 3;
+                    //canviOrientacio(direccio, cont);
                     // Si hi ha una paret a la seguent posicio cambia de sentit
-                    direccio = Orientacio.E;
+                    direccio = Orientacio.W;
+                    //potAnarDireccio(plano, iniciY, iniciX, direccio);
                 } else {
                     //Si esta buit podem seguir caminant cap aquella direccio
                     iniciY--;
@@ -108,28 +124,45 @@ public class Robot extends Bender {
                 }
             }
 
-                if (direccio == Orientacio.W) {
-                    //WEST
-                    if (plano[iniciY][iniciX - 1] == '#') {
-                        // Si hi ha una paret a la seguent posicio cambia de sentit
-                        direccio = Orientacio.S;
-                    } else {
-                        //Si esta buit podem seguir caminant cap aquella direccio
-                        iniciX--;
-                        resultat += Orientacio.W.name();
-                    }
-                }
-
-
-                if ((plano[iniciY][iniciX] == '$')) {
-                    //Si la seguent posiucio es '$' avança i afegeix la direccio a resulat.
-                    haArribat = true;
+            if (direccio == Orientacio.W) {
+                //WEST
+                if (plano[iniciY][iniciX - 1] == '#') {
+                    //cont = 4;
+                    //canviOrientacio(direccio, cont);
+                    // Si hi ha una paret a la seguent posicio cambia de sentit
+                    direccio = Orientacio.S;
+                    //potAnarDireccio(plano, iniciY, iniciX, direccio);
+                } else {
+                    //Si esta buit podem seguir caminant cap aquella direccio
+                    iniciX--;
+                    resultat += Orientacio.W.name();
                 }
             }
 
-            return resultat;
 
+            if ((plano[iniciY][iniciX] == '$')) {
+                //Si la seguent posiucio es '$' avança i afegeix la direccio a resulat.
+                haArribat = true;
+            }
         }
+        return resultat;
+
+    }
+
+    private Orientacio potAnarDireccio(char[][] plano, int iniciY, int iniciX, Orientacio direccio) {
+        // Si hi ha una paret a la seguent posicio, busca primer cap al sud
+
+        //ordre S,E,N,W
+        if (plano[iniciY + 1][iniciX] != '#') {
+            direccio = Orientacio.S;
+        } else if (plano[iniciY][iniciX + 1] != '#') {
+            direccio = Orientacio.E;
+        } else if (plano[iniciY][iniciX - 1] != '#') {
+            direccio = Orientacio.W;
+        } else if (plano[iniciY - 1][iniciX] != '#') {
+            direccio = Orientacio.N;
+        }
+        return direccio;
     }
 /*
         } else if (orientacio == orientacio.E) {
@@ -245,38 +278,29 @@ public class Robot extends Bender {
 
 //------------------------------------------------------------
 
-/*
-        private void canviOrientacio ( int iniciY, int iniciX, int cont){
-            //int[] camina = new int[2];
-            switch (cont) {
-                case 0:
-                    iniciY++;
-                    //Y++;
-                    resultat += Orientacio.S.name();
-                    break;
-                case 1:
-                    iniciX += 1;
-                    //X++;
-                    resultat += Orientacio.E.name();
-                    break;
-                case 2:
-                    iniciY -= 1;
-                    //Y--;
-                    resultat += Orientacio.N.name();
-                    break;
-                case 3:
-                    resultat += Orientacio.W.name();
-                    iniciX -= 1;
-                    //X++;
-                    break;
-            }
-            // camina[0] = iniciX;
-            //camina[1] = iniciY;
-            //return camina;
+
+    private void canviOrientacio(Orientacio direccio, int cont) {
+        if (cont == 4) {
+            cont = 0;
         }
 
+        switch (cont) {
+            case 0:
+                direccio = Orientacio.S;
+                break;
+            case 1:
+                direccio = Orientacio.E;
+                break;
+            case 2:
+                direccio = Orientacio.N;
+                break;
+            case 3:
+                direccio = Orientacio.W;
+                break;
+        }
     }
 
- */
+}
+
 
 
