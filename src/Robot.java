@@ -61,7 +61,6 @@ public class Robot extends Bender {
     }
 
 
-
     public void setHaArribat(boolean haArribat) {
         this.haArribat = haArribat;
     }
@@ -72,16 +71,17 @@ public class Robot extends Bender {
 
 
         int cont = 0;
-        boolean potAnarAlSud = true;
         Orientacio direccio = Orientacio.S;
         //direccio = Orientacio.S;
         while (!haArribat) {
-
             // El probrama cada vegada que troba una paret ha de tornar a comensar el ordre cap el sur.
-
             cont = 0;
             if (direccio == Orientacio.S) {
                 //S
+                if (plano[iniciY + 1][iniciX] =='T') {
+                    //Troba un Transportador
+                    break;
+                }
                 if (plano[iniciY + 1][iniciX] == '#') {
                     // Si hi ha una paret a la seguent posicio cambia de sentit
 
@@ -97,6 +97,10 @@ public class Robot extends Bender {
 
             if (direccio == Orientacio.E) {
                 //EAST
+                if (plano[iniciY][iniciX+1] =='T') {
+                    //Troba un Transportador
+                    break;
+                }
                 if (plano[iniciY][iniciX + 1] == '#') {
                     // Si hi ha una paret a la seguent posicio cambia de sentit
                     //cont = 2;
@@ -118,16 +122,19 @@ public class Robot extends Bender {
 
             if (direccio == Orientacio.N) {
                 //NORTH
+                if (plano[iniciY - 1][iniciX] =='T') {
+                    //Troba un Transportador
+                    break;
+                }
                 if (plano[iniciY - 1][iniciX] == '#') {
                     //cont = 3;
                     //canviOrientacio(direccio, cont);
                     // Si hi ha una paret a la seguent posicio cambia de sentit
                     //direccio = Orientacio.W;
-                   // direccio = potAnarDireccio(plano, iniciY, iniciX, direccio);
+                    // direccio = potAnarDireccio(plano, iniciY, iniciX, direccio);
 
                     Orientacio novaDireccio = potAnarDireccio(plano, iniciY, iniciX, direccio);
                     direccio = novaDireccio;
-
 
 
                 } else {
@@ -139,6 +146,11 @@ public class Robot extends Bender {
 
             if (direccio == Orientacio.W) {
                 //WEST
+                if (plano[iniciY][iniciX-1] =='T') {
+                    //Troba un Transportador
+
+                    break;
+                }
                 if (plano[iniciY][iniciX - 1] == '#') {
                     //cont = 4;
                     //canviOrientacio(direccio, cont);
@@ -177,9 +189,9 @@ public class Robot extends Bender {
         } else if (plano[iniciY][iniciX + 1] != '#') {
             return direccio = Orientacio.E;
         } else if (plano[iniciY - 1][iniciX] != '#') {
-           return direccio = Orientacio.N;
+            return direccio = Orientacio.N;
 
-        }else if (plano[iniciY][iniciX - 1] != '#') {
+        } else if (plano[iniciY][iniciX - 1] != '#') {
             return direccio = Orientacio.W;
         }
         return direccio;

@@ -1,8 +1,10 @@
 public class Item extends Robot{
+    //item no es un Robot
 
    // public final char[][] plano;
     //private final int[] cordInicial;
    // private final int[] cordFinal;
+
 
 
     public Item(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano) {
@@ -72,6 +74,7 @@ class Transportador extends Item {
     public Transportador(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano) {
         super(iniciX, iniciY, finalX, finalY, resultat, plano);
     }
+
 
 }
 

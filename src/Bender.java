@@ -2,6 +2,7 @@ import java.util.Arrays;
 
 public class Bender {
 
+    // DECLAREM VARIABLES DE CLASE
     char[][] plano;
     int iniciX = 0;
     int iniciY = 0;
@@ -16,6 +17,7 @@ public class Bender {
         this.finalX = finalX;
         this.finalY = finalY;
         this.resultat = resultat;
+
     }
 
     public static void main(String[] args) {
@@ -74,6 +76,7 @@ public class Bender {
                 plano[Fila][Col] = posicio[Fila].charAt(Col);
             }
         }
+        //Crear un mapa de items de les mateixes dimensions que el mapa de caracters
     }
 
 
@@ -96,37 +99,32 @@ public class Bender {
         // Arrays de cordenades final('$')
         int[] cordFinal = new int[2];
         // Arrays de cordenades Teletransportador('T')
-        int[][] cordTele;
+        int[][] cordTele = new int[10][2];
 
         //Cridam a la funcio que pasant el planol torna un array amb les cordenades.
-        trobarItems(plano, cordInicial,cordFinal);
+        trobarItems(plano, cordInicial,cordFinal,cordTele);
+        //int[][] cordTele = trobarItems(plano, cordInicial,cordFinal);
 
         iniciX = cordInicial[0];
         iniciY = cordInicial[1];
         finalX = cordFinal[0];
         finalY = cordFinal[1];
+
+
+
+        //Guardar les cordenades de el nombre de teletransportadors
+        for (int i = 0; i < cordTele.length; i++) {
+            for (int j = 0; j < cordTele[i].length; j++) {
+                int teleX = cordTele[i][0];
+                int teleY = cordTele[i][1];
+            }
+        }
         //String resultat="";
 
         //Cream el Robot i li pasa, les cordenades inicials.
         Robot robot = new Robot(iniciX,iniciY,finalX,finalY,resultat,plano);
 
-
-/*
-        boolean comparacion = haArribat(iniciY, iniciX, finalY, finalX);
-
-        while (plano[iniciY][iniciX] != '#' || comparacion){
-            iniciY += 1;
-            resultat += "S";
-        }
-
-
- */
-
-
-
-
         System.out.println("X :" + iniciX + "| Y =  "+ iniciY);
-
         System.out.println(" final X :" + finalX + "| final  Y =  "+ finalY);
 
         //ObjectiuItem objectiu = new ObjectiuItem();
@@ -135,17 +133,16 @@ public class Bender {
         System.out.println("Llarg de Y" + llargY  + " ||  Llarg de X :" + llargX );
 
 
-
-
         System.out.println(Arrays.toString(cordInicial));
 
 
         return robot.walk();
     }
 
-    private void trobarItems(char[][] plano, int[] cordInicial, int[] cordFinal) {
-        String resultat="";
-
+    private void trobarItems(char[][] plano, int[] cordInicial, int[] cordFinal,int[][] cordTele) {
+        //String resultat="";
+        int numTele = 0;
+        //int[][] cordTele = new int[numTele][2];
         // Primer bucle yPos es la fila
         for (int posFila = 0; posFila < plano.length; posFila++) {
             //Segon bucle per trobar la cordenada X columna
@@ -166,18 +163,18 @@ public class Bender {
                 }
                 if (plano[posFila][posCol] == 'T') {
 
+                    // Guarda la posicio X
+                    cordTele[numTele][0] = posCol;
+                    // Guarda la posicio Y
+                    cordTele[numTele][1] = posFila;
+                    //Num de els teletransportadors que tenim
+                    numTele++;
+                    Item tele = new Transportador(iniciX,iniciY,finalX,finalY,resultat,plano);
                 }
             }
         }
+        //return cordTele;
     }
-
-   /* private boolean haArribat(int y1, int x1, int y2, int x2) {
-        return y2 == y1 && x2 == x1;
-
-    }
-
-    */
-
     int bestRun() {
 
 
