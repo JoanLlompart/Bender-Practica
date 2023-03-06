@@ -1,4 +1,4 @@
-public class Item extends Robot{
+public class Item extends Bender{
     //item no es un Robot
 
    // public final char[][] plano;
@@ -6,9 +6,12 @@ public class Item extends Robot{
    // private final int[] cordFinal;
 
 
-
     public Item(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano) {
         super(iniciX, iniciY, finalX, finalY, resultat, plano);
+    }
+
+    public Item(String mapa) {
+        super(mapa);
     }
 }
 /*
@@ -70,11 +73,32 @@ class Inversor extends Item {
  */
 
 class Transportador extends Item {
+    int numTele = 0;
 
     public Transportador(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano) {
         super(iniciX, iniciY, finalX, finalY, resultat, plano);
+
     }
 
+
+    public int trobarTele(int numTele, int[][] cordTele) {
+        for (int posFila = 0; posFila < plano.length; posFila++) {
+            //Segon bucle per trobar la cordenada X columna
+            for (int posCol = 0; posCol < plano[posFila].length; posCol++) {
+                if (plano[posFila][posCol] == 'T') {
+                    // Guarda la posicio X
+                    cordTele[numTele][0] = posCol;
+                    // Guarda la posicio Y
+                    cordTele[numTele][1] = posFila;
+                    //Num de els teletransportadors que tenim
+                    numTele++;
+                    //Item tele = new Transportador(iniciX,iniciY,finalX,finalY,resultat,plano);
+                }
+            }
+
+        }
+        return numTele;
+    }
 
 }
 

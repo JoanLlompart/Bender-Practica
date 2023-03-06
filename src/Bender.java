@@ -8,6 +8,8 @@ public class Bender {
     int iniciY = 0;
     int finalX = 0;
     int finalY = 0;
+    int numTele = 0;
+    int[][] cordTele;
     String resultat = "";
 
     public Bender(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano) {
@@ -98,11 +100,20 @@ public class Bender {
 
         // Arrays de cordenades final('$')
         int[] cordFinal = new int[2];
-        // Arrays de cordenades Teletransportador('T')
-        int[][] cordTele = new int[10][2];
 
+        int ntele =cercaCantidadTele();
+        numTele = ntele;
+
+        // Arrays de cordenades Teletransportador('T')
+        cordTele = new int[ntele][2];
+        int teleX;
+        int teleY;
         //Cridam a la funcio que pasant el planol torna un array amb les cordenades.
-        trobarItems(plano, cordInicial,cordFinal,cordTele);
+
+        int[][] cordTeleT = trobarItems(plano, cordInicial,cordFinal,cordTele);
+        cordTele = cordTeleT;
+
+        System.out.println(cordTele[0][0] + cordTele[0][1] );
         //int[][] cordTele = trobarItems(plano, cordInicial,cordFinal);
 
         iniciX = cordInicial[0];
@@ -115,10 +126,13 @@ public class Bender {
         //Guardar les cordenades de el nombre de teletransportadors
         for (int i = 0; i < cordTele.length; i++) {
             for (int j = 0; j < cordTele[i].length; j++) {
-                int teleX = cordTele[i][0];
-                int teleY = cordTele[i][1];
+                teleX = cordTele[i][0];
+                teleY = cordTele[i][1];
             }
         }
+
+
+
         //String resultat="";
 
         //Cream el Robot i li pasa, les cordenades inicials.
@@ -139,11 +153,24 @@ public class Bender {
         return robot.walk();
     }
 
-    private void trobarItems(char[][] plano, int[] cordInicial, int[] cordFinal,int[][] cordTele) {
+    private int cercaCantidadTele() {
+        for (int posFila = 0; posFila < plano.length; posFila++) {
+            for (int posCol = 0; posCol < plano[posFila].length; posCol++) {
+                if (plano[posFila][posCol] == 'T'){
+                    numTele++;
+                }
+
+            }
+
+        }
+        return numTele;
+    }
+
+    public int[][] trobarItems(char[][] plano, int[] cordInicial, int[] cordFinal, int[][] cordTele) {
         //String resultat="";
-        int numTele = 0;
         //int[][] cordTele = new int[numTele][2];
         // Primer bucle yPos es la fila
+        int contemp =0;
         for (int posFila = 0; posFila < plano.length; posFila++) {
             //Segon bucle per trobar la cordenada X columna
             for (int posCol = 0; posCol < plano[posFila].length; posCol++) {
@@ -164,16 +191,16 @@ public class Bender {
                 if (plano[posFila][posCol] == 'T') {
 
                     // Guarda la posicio X
-                    cordTele[numTele][0] = posCol;
+                    cordTele[contemp][0] = posCol;
                     // Guarda la posicio Y
-                    cordTele[numTele][1] = posFila;
-                    //Num de els teletransportadors que tenim
-                    numTele++;
-                    Item tele = new Transportador(iniciX,iniciY,finalX,finalY,resultat,plano);
+                    cordTele[contemp][1] = posFila;
+                    //Item tele = new Transportador(iniciX,iniciY,finalX,finalY,resultat,plano);
+                    contemp++;
+
                 }
             }
         }
-        //return cordTele;
+        return cordTele;
     }
     int bestRun() {
 
