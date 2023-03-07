@@ -99,6 +99,8 @@ public class Robot extends Bender {
                 //EAST
                 if (plano[iniciY][iniciX+1] =='T') {
                     //Troba un Transportador
+
+
                     break;
                 }
                 if (plano[iniciY][iniciX + 1] == '#') {
@@ -150,6 +152,10 @@ public class Robot extends Bender {
                     //Troba un Transportador
                     // Ja ha de estar creat i se ha de implementar una funcio que calculi la distancia
                     // amb el teorema de pitagoras
+
+                    //implementar el constructor
+
+
                     break;
                 }
                 if (plano[iniciY][iniciX - 1] == '#') {

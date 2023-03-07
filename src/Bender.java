@@ -22,6 +22,11 @@ public class Bender {
 
     }
 
+    public Bender() {
+
+
+    }
+
     public static void main(String[] args) {
         String mapa =  "" +
                 "###########\n" +
@@ -110,10 +115,29 @@ public class Bender {
         int teleY;
         //Cridam a la funcio que pasant el planol torna un array amb les cordenades.
 
-        int[][] cordTeleT = trobarItems(plano, cordInicial,cordFinal,cordTele);
+        // Cream un array de Objectes Transportador
+        Transportador[] transportador = new Transportador[numTele];
+
+        int[][] cordTeleT = trobarItems(plano, cordInicial,cordFinal,cordTele, transportador);
         cordTele = cordTeleT;
 
-        System.out.println(cordTele[0][0] + cordTele[0][1] );
+        System.out.println();
+
+        for (int i = 0; i < cordTele.length; i++) {
+            //proba
+           // transportador = new Transportador[]{new Transportador(cordTele[i][0], cordTele[i][1])};
+            teleX = cordTele[i][0];
+            teleY = cordTele[i][1];
+            transportador[i] = new Transportador(teleX, teleY);
+        }
+
+
+
+
+
+
+        //System.out.println(cordTele[0][0] + cordTele[0][1] );
+
         //int[][] cordTele = trobarItems(plano, cordInicial,cordFinal);
 
         iniciX = cordInicial[0];
@@ -122,15 +146,17 @@ public class Bender {
         finalY = cordFinal[1];
 
 
-
+/*
         //Guardar les cordenades de el nombre de teletransportadors
         for (int i = 0; i < cordTele.length; i++) {
-            for (int j = 0; j < cordTele[i].length; j++) {
                 teleX = cordTele[i][0];
                 teleY = cordTele[i][1];
-            }
+                transportador[i] = new Transportador(teleX, teleY);
+
         }
 
+
+ */
 
 
         //String resultat="";
@@ -141,7 +167,6 @@ public class Bender {
         System.out.println("X :" + iniciX + "| Y =  "+ iniciY);
         System.out.println(" final X :" + finalX + "| final  Y =  "+ finalY);
 
-        //ObjectiuItem objectiu = new ObjectiuItem();
         int llargY = plano.length;
         int llargX = plano[0].length;
         System.out.println("Llarg de Y" + llargY  + " ||  Llarg de X :" + llargX );
@@ -159,14 +184,13 @@ public class Bender {
                 if (plano[posFila][posCol] == 'T'){
                     numTele++;
                 }
-
             }
 
         }
         return numTele;
     }
 
-    public int[][] trobarItems(char[][] plano, int[] cordInicial, int[] cordFinal, int[][] cordTele) {
+    public int[][] trobarItems(char[][] plano, int[] cordInicial, int[] cordFinal, int[][] cordTele, Transportador[] transportador) {
         //String resultat="";
         //int[][] cordTele = new int[numTele][2];
         // Primer bucle yPos es la fila
@@ -189,14 +213,12 @@ public class Bender {
                     //break;
                 }
                 if (plano[posFila][posCol] == 'T') {
-
                     // Guarda la posicio X
                     cordTele[contemp][0] = posCol;
                     // Guarda la posicio Y
                     cordTele[contemp][1] = posFila;
-                    //Item tele = new Transportador(iniciX,iniciY,finalX,finalY,resultat,plano);
+                   // transportador[contemp] = new Transportador(posCol, posFila);
                     contemp++;
-
                 }
             }
         }

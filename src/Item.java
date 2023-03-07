@@ -72,16 +72,49 @@ class Inversor extends Item {
 
  */
 
-class Transportador extends Item {
-    int numTele = 0;
+class Transportador extends Bender{
 
-    public Transportador(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano) {
-        super(iniciX, iniciY, finalX, finalY, resultat, plano);
+    private int x;
+    private int y;
+    private static int[][] coordenadas;
+
+   public Transportador(int x,int y) {
+       this.x = x;
+        this.y = y;
+
+    }
+    public void setCoordenadas(int[][] coordenadas) {
+        //coordenadas = array;
+        for (int i = 0; i < coordenadas.length; i++) {
+            coordenadas[i][0] = x;
+            coordenadas[i][0] = y;
+        }
 
     }
 
+    public static int[][] getCoordenadas() {
+        return coordenadas;
+    }
 
-    public int trobarTele(int numTele, int[][] cordTele) {
+    public Transportador calcularMasCercano(){
+        Transportador masCercano = null;
+        double distanciaMasCercana = Double.MAX_VALUE;
+        for (int i = 0; i < coordenadas.length; i++) {
+            int x2 = coordenadas[i][0];
+            int y2 = coordenadas[i][1];
+            double distancia = Math.sqrt(Math.pow(x2 - x, 2) + Math.pow(y2 - y, 2));
+            if (distancia < distanciaMasCercana) {
+                distanciaMasCercana = distancia;
+                masCercano = new Transportador(x2, y2);
+            }
+        }
+        return masCercano;
+    }
+
+
+    /*public int trobarTele(int numTele, int[][] cordTele) {
+
+
         for (int posFila = 0; posFila < plano.length; posFila++) {
             //Segon bucle per trobar la cordenada X columna
             for (int posCol = 0; posCol < plano[posFila].length; posCol++) {
@@ -100,6 +133,8 @@ class Transportador extends Item {
         return numTele;
     }
 
+
+     */
 }
 
 
