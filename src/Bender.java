@@ -11,7 +11,7 @@ public class Bender {
     int numTele = 0;
     int[][] cordTele;
     String resultat = "";
-
+    Transportador[] transportador;
     public Bender(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano,int[][] cordTele) {
         this.plano = plano;
         this.iniciX = iniciX;
@@ -113,11 +113,19 @@ public class Bender {
         //Cridam a la funcio que pasant el planol torna un array amb les cordenades.
 
         // Cream un array de Objectes Transportador
-        //Transportador[] transportador = new Transportador[numTele];
+        Transportador[] transportador = new Transportador[numTele];
+        
 
         int[][] cordTeleT = trobarItems(plano, cordInicial,cordFinal,cordTele);
         cordTele = cordTeleT;
 
+        //Bucle per crear els objectes Transportador,
+        // i assignar valors x i y a cada transportador.
+        for (int i = 0; i < cordTele.length; i++) {
+           int telx= cordTele[i][0];
+           int telY =cordTele[i][1];
+           transportador[i] = new Transportador(telx,telY);
+        }
         System.out.println();
 
         /*
@@ -239,3 +247,4 @@ public class Bender {
         return 0;
     }
 }
+

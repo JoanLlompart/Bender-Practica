@@ -71,8 +71,8 @@ class Inversor extends Item {
 
 class Transportador {
 
-    private int x;
-    private int y;
+    int x;
+    int y;
     private static int[][] coordenadas;
 
    public Transportador(int x,int y) {
