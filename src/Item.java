@@ -6,8 +6,8 @@ public class Item extends Bender{
    // private final int[] cordFinal;
 
 
-    public Item(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano,int[][] cordTele) {
-        super(iniciX, iniciY, finalX, finalY, resultat, plano,cordTele);
+    public Item(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano,int[][] cordTele,Transportador[] transportador) {
+        super(iniciX, iniciY, finalX, finalY, resultat, plano,cordTele,transportador);
     }
 
 }

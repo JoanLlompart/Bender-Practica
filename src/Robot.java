@@ -1,9 +1,9 @@
 public class Robot extends Bender {
 
     // hem de guardar la posicio inicial.
-    public Robot(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano, int[][] cordTele) {
+    public Robot(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano, int[][] cordTele,Transportador[] transportador) {
         //Constructor crida a el contructor de Bender
-        super(iniciX, iniciY, finalX, finalY, resultat, plano,cordTele);
+        super(iniciX, iniciY, finalX, finalY, resultat, plano,cordTele,transportador);
     }
 
 

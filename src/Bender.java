@@ -12,7 +12,7 @@ public class Bender {
     int[][] cordTele;
     String resultat = "";
     Transportador[] transportador;
-    public Bender(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano,int[][] cordTele) {
+    public Bender(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano,int[][] cordTele,Transportador[] transportador) {
         this.plano = plano;
         this.iniciX = iniciX;
         this.iniciY = iniciY;
@@ -20,6 +20,8 @@ public class Bender {
         this.finalY = finalY;
         this.resultat = resultat;
         this.cordTele = cordTele;
+        this.transportador = transportador;
+
 
     }
     public static void main(String[] args) {
@@ -170,7 +172,7 @@ public class Bender {
         //String resultat="";
 
         //Cream el Robot i li pasa, les cordenades inicials.
-        Robot robot = new Robot(iniciX,iniciY,finalX,finalY,resultat,plano,cordTele);
+        Robot robot = new Robot(iniciX,iniciY,finalX,finalY,resultat,plano,cordTele,transportador);
 
         System.out.println("X :" + iniciX + "| Y =  "+ iniciY);
         System.out.println(" final X :" + finalX + "| final  Y =  "+ finalY);
