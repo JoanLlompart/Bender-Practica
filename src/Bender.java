@@ -12,21 +12,16 @@ public class Bender {
     int[][] cordTele;
     String resultat = "";
 
-    public Bender(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano) {
+    public Bender(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano,int[][] cordTele) {
         this.plano = plano;
         this.iniciX = iniciX;
         this.iniciY = iniciY;
         this.finalX = finalX;
         this.finalY = finalY;
         this.resultat = resultat;
+        this.cordTele = cordTele;
 
     }
-
-    public Bender() {
-
-
-    }
-
     public static void main(String[] args) {
         String mapa =  "" +
                 "###########\n" +
@@ -106,7 +101,9 @@ public class Bender {
         // Arrays de cordenades final('$')
         int[] cordFinal = new int[2];
 
+        //calcula la cantidad de transportador
         int ntele =cercaCantidadTele();
+        //cordTele = arrayTele;
         numTele = ntele;
 
         // Arrays de cordenades Teletransportador('T')
@@ -116,13 +113,14 @@ public class Bender {
         //Cridam a la funcio que pasant el planol torna un array amb les cordenades.
 
         // Cream un array de Objectes Transportador
-        Transportador[] transportador = new Transportador[numTele];
+        //Transportador[] transportador = new Transportador[numTele];
 
-        int[][] cordTeleT = trobarItems(plano, cordInicial,cordFinal,cordTele, transportador);
+        int[][] cordTeleT = trobarItems(plano, cordInicial,cordFinal,cordTele);
         cordTele = cordTeleT;
 
         System.out.println();
 
+        /*
         for (int i = 0; i < cordTele.length; i++) {
             //proba
            // transportador = new Transportador[]{new Transportador(cordTele[i][0], cordTele[i][1])};
@@ -131,6 +129,8 @@ public class Bender {
             transportador[i] = new Transportador(teleX, teleY);
         }
 
+
+         */
 
 
 
@@ -162,7 +162,7 @@ public class Bender {
         //String resultat="";
 
         //Cream el Robot i li pasa, les cordenades inicials.
-        Robot robot = new Robot(iniciX,iniciY,finalX,finalY,resultat,plano);
+        Robot robot = new Robot(iniciX,iniciY,finalX,finalY,resultat,plano,cordTele);
 
         System.out.println("X :" + iniciX + "| Y =  "+ iniciY);
         System.out.println(" final X :" + finalX + "| final  Y =  "+ finalY);
@@ -179,20 +179,31 @@ public class Bender {
     }
 
     private int cercaCantidadTele() {
+
         for (int posFila = 0; posFila < plano.length; posFila++) {
             for (int posCol = 0; posCol < plano[posFila].length; posCol++) {
                 if (plano[posFila][posCol] == 'T'){
                     numTele++;
                 }
             }
+        }
+        /*for (int posY = 0; posY < plano.length; posY++) {
+            for (int posX = 0; posX < plano[posY].length; posX++) {
+                if (plano[posY][posX] == 'T'){
+                    int i =0;
+                        cordTele[i][0] = posX;
+                        cordTele[i][1] = posY;
+                    i++;
+                }
+
+            }
 
         }
+
+         */
         return numTele;
     }
-
-    public int[][] trobarItems(char[][] plano, int[] cordInicial, int[] cordFinal, int[][] cordTele, Transportador[] transportador) {
-        //String resultat="";
-        //int[][] cordTele = new int[numTele][2];
+    public int[][] trobarItems(char[][] plano, int[] cordInicial, int[] cordFinal, int[][] cordTele) {
         // Primer bucle yPos es la fila
         int contemp =0;
         for (int posFila = 0; posFila < plano.length; posFila++) {
@@ -201,10 +212,8 @@ public class Bender {
                 if (plano[posFila][posCol] =='X') {
                     cordInicial[0] = posCol;
                     cordInicial[1] = posFila;
-
                     //return cordInici;
                 }
-
                 if (plano[posFila][posCol] == '$') {
                     cordFinal[0] = posCol;
                     cordFinal[1] = posFila;
@@ -220,13 +229,13 @@ public class Bender {
                    // transportador[contemp] = new Transportador(posCol, posFila);
                     contemp++;
                 }
+
+
             }
         }
         return cordTele;
     }
     int bestRun() {
-
-
         return 0;
     }
 }

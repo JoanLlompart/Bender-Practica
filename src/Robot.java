@@ -1,9 +1,9 @@
 public class Robot extends Bender {
 
     // hem de guardar la posicio inicial.
-    public Robot(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano) {
+    public Robot(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano, int[][] cordTele) {
         //Constructor crida a el contructor de Bender
-        super(iniciX, iniciY, finalX, finalY, resultat, plano);
+        super(iniciX, iniciY, finalX, finalY, resultat, plano,cordTele);
     }
 
 
@@ -29,7 +29,6 @@ public class Robot extends Bender {
 
 
     // haArribat variable boolean.
-    //boolean haArribat = false;
     boolean haArribat = haArribat(iniciY, iniciX, finalY, finalX);
 
     public boolean haArribat(int iniciY, int iniciX, int finalY, int finalX) {
@@ -80,7 +79,15 @@ public class Robot extends Bender {
                 //S
                 if (plano[iniciY + 1][iniciX] =='T') {
                     //Troba un Transportador
-                    break;
+                    //Transportador transportar= calcularMasCercano();
+                    //System.out.println(transportar);
+                    iniciY++;
+                    resultat += Orientacio.S.name();
+                    viatgeAmbTransportador();
+                   // iniciY++;
+                   // resultat += Orientacio.S.name();
+                    //break;
+
                 }
                 if (plano[iniciY + 1][iniciX] == '#') {
                     // Si hi ha una paret a la seguent posicio cambia de sentit
@@ -99,18 +106,17 @@ public class Robot extends Bender {
                 //EAST
                 if (plano[iniciY][iniciX+1] =='T') {
                     //Troba un Transportador
+                    //Transportador transportar= calcularMasCercano();
+                    //System.out.println(transportar + "Est transport");
 
+                    //Avançam la posicio per entrar al transportador
+                    iniciX++;
+                    resultat += Orientacio.E.name();
+                    viatgeAmbTransportador();
 
-                    break;
+                    //break;
                 }
                 if (plano[iniciY][iniciX + 1] == '#') {
-                    // Si hi ha una paret a la seguent posicio cambia de sentit
-                    //cont = 2;
-                    //canviOrientacio(direccio, cont);
-                    //direccio = Orientacio.N;
-                    //direccio = potAnarDireccio(plano, iniciY, iniciX, direccio);
-
-
                     Orientacio novaDireccio = potAnarDireccio(plano, iniciY, iniciX, direccio);
                     direccio = novaDireccio;
 
@@ -126,15 +132,17 @@ public class Robot extends Bender {
                 //NORTH
                 if (plano[iniciY - 1][iniciX] =='T') {
                     //Troba un Transportador
-                    break;
+                    //Transportador transportar= calcularMasCercano();
+                    //System.out.println(transportar + "North transport");
+
+                    //Avançam la posicio per entrar al transportador
+                    iniciY--;
+                    resultat += Orientacio.N.name();
+                    viatgeAmbTransportador();
+
+                   // break;
                 }
                 if (plano[iniciY - 1][iniciX] == '#') {
-                    //cont = 3;
-                    //canviOrientacio(direccio, cont);
-                    // Si hi ha una paret a la seguent posicio cambia de sentit
-                    //direccio = Orientacio.W;
-                    // direccio = potAnarDireccio(plano, iniciY, iniciX, direccio);
-
                     Orientacio novaDireccio = potAnarDireccio(plano, iniciY, iniciX, direccio);
                     direccio = novaDireccio;
 
@@ -154,17 +162,17 @@ public class Robot extends Bender {
                     // amb el teorema de pitagoras
 
                     //implementar el constructor
+                   // Transportador transportar= calcularMasCercano();
+                   // System.out.println(transportar + "west transport");
+
+                    //Avançam la posicio per entrar al transportador
+                    iniciX--;
+                    resultat += Orientacio.W.name();
+                    viatgeAmbTransportador();
 
 
-                    break;
                 }
                 if (plano[iniciY][iniciX - 1] == '#') {
-                    //cont = 4;
-                    //canviOrientacio(direccio, cont);
-                    // Si hi ha una paret a la seguent posicio cambia de sentit
-                    //direccio = Orientacio.S;
-                    //direccio = potAnarDireccio(plano, iniciY, iniciX, direccio);
-
                     Orientacio novaDireccio = potAnarDireccio(plano, iniciY, iniciX, direccio);
                     direccio = novaDireccio;
 
@@ -187,6 +195,22 @@ public class Robot extends Bender {
 
     }
 
+    public void viatgeAmbTransportador() {
+
+
+        for (int i = 0; i < cordTele.length; i++) {
+            int x2 = cordTele[i][0];
+            int y2 = cordTele[i][1];
+            if (iniciX != x2 && iniciY != y2 ) {
+                iniciX = x2;
+                iniciY = y2;
+                break;
+            } else {
+                throw new RuntimeException("NO SE POT TELETRANSPORTAR PER ARA");
+            }
+        }
+    }
+
     public Orientacio potAnarDireccio(char[][] plano, int iniciY, int iniciX, Orientacio direccio) {
         // Si hi ha una paret a la seguent posicio, busca primer cap al sud
 
@@ -203,13 +227,26 @@ public class Robot extends Bender {
         }
         return direccio;
     }
+    public Transportador calcularMasCercano(){
+        Transportador masCercano = null;
+        double distanciaMasCercana = Double.MAX_VALUE;
+        for (int i = 0; i < cordTele.length; i++) {
+            int x2 = cordTele[i][0];
+            int y2 = cordTele[i][1];
+            double distancia = Math.sqrt(Math.pow(x2 - iniciX, 2) + Math.pow(y2 - iniciY, 2));
+            if (distancia < distanciaMasCercana) {
+                distanciaMasCercana = distancia;
+                masCercano = new Transportador(x2, y2);
+            }
+        }
+        return masCercano;
+    }
 /*
         } else if (orientacio == orientacio.E) {
             //EST
             if (plano[iniciY][iniciX + 1] == '#') {
                 //Si esta amb una paret canvi de sentit
                 direccio = orientacio.N;
-
 
             } else if (plano[iniciY][iniciX + 1] == ' ') {
                 //Si esta buit podem seguir caminant cap aquella direccio
@@ -243,7 +280,6 @@ public class Robot extends Bender {
                 return resultat;
             }
 
-
         } else if (orientacio == orientacio.W) {
             //W
             if (plano[iniciY][iniciX - 1] == '#') {
@@ -261,15 +297,7 @@ public class Robot extends Bender {
                 resultat += orientacio.W.name();
                 return resultat;
             }
-
-
  */
-
-
-
-
-
-
 
 /*
        if (finalX==iniciX) {
@@ -286,10 +314,7 @@ public class Robot extends Bender {
                 resultat += orientacio.E.name();
             }
        }
-
-
        //Si no consideix cap cordenada.
-
        while (!comparacion) {
            //canviOrientacio(iniciY,iniciX,cont);
            //ha de cambiar comprobar antes de caminar si pot avançar i si
@@ -302,27 +327,19 @@ public class Robot extends Bender {
                canviOrientacio(iniciY,iniciX,cont);
            } else if (comparacion){
                return resultat;
-
            } else {
                canviOrientacio(iniciY,iniciX,cont);
                break;
-
            }
            //iniciX += 1;
            //resultat += orientacio.E.name();
        }
-
-
  */
-
 //------------------------------------------------------------
-
-
     private void canviOrientacio(Orientacio direccio, int cont) {
         if (cont == 4) {
             cont = 0;
         }
-
         switch (cont) {
             case 0:
                 direccio = Orientacio.S;
@@ -338,7 +355,6 @@ public class Robot extends Bender {
                 break;
         }
     }
-
 }
 
 

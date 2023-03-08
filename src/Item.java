@@ -6,13 +6,10 @@ public class Item extends Bender{
    // private final int[] cordFinal;
 
 
-    public Item(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano) {
-        super(iniciX, iniciY, finalX, finalY, resultat, plano);
+    public Item(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano,int[][] cordTele) {
+        super(iniciX, iniciY, finalX, finalY, resultat, plano,cordTele);
     }
 
-    public Item(String mapa) {
-        super(mapa);
-    }
 }
 /*
 class ParetItem extends Item {
@@ -72,7 +69,7 @@ class Inversor extends Item {
 
  */
 
-class Transportador extends Bender{
+class Transportador {
 
     private int x;
     private int y;
@@ -96,6 +93,7 @@ class Transportador extends Bender{
         return coordenadas;
     }
 
+    /*
     public Transportador calcularMasCercano(){
         Transportador masCercano = null;
         double distanciaMasCercana = Double.MAX_VALUE;
@@ -111,6 +109,8 @@ class Transportador extends Bender{
         return masCercano;
     }
 
+
+     */
 
     /*public int trobarTele(int numTele, int[][] cordTele) {
 
