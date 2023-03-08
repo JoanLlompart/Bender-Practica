@@ -24,6 +24,10 @@ public class Bender {
 
 
     }
+
+    public Bender() {
+    }
+
     public static void main(String[] args) {
         String mapa =  "" +
                 "###########\n" +
@@ -128,7 +132,7 @@ public class Bender {
            int telY =cordTele[i][1];
            transportador[i] = new Transportador(telx,telY);
         }
-        System.out.println();
+
 
         /*
         for (int i = 0; i < cordTele.length; i++) {

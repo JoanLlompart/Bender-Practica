@@ -1,4 +1,4 @@
-public class Item extends Bender{
+public class Item{
     //item no es un Robot
 
    // public final char[][] plano;
@@ -6,9 +6,6 @@ public class Item extends Bender{
    // private final int[] cordFinal;
 
 
-    public Item(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano,int[][] cordTele,Transportador[] transportador) {
-        super(iniciX, iniciY, finalX, finalY, resultat, plano,cordTele,transportador);
-    }
 
 }
 /*
@@ -69,17 +66,22 @@ class Inversor extends Item {
 
  */
 
-class Transportador {
+class Transportador extends Bender{
 
     int x;
     int y;
     private static int[][] coordenadas;
-
-   public Transportador(int x,int y) {
-       this.x = x;
-        this.y = y;
+     public Transportador(int x, int y) {
+         this.x = x;
+         this.y = y;
 
     }
+
+    public Transportador(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano, int[][] cordTele, Transportador[] transportador) {
+        super(iniciX, iniciY, finalX, finalY, resultat, plano, cordTele, transportador);
+    }
+
+
     public void setCoordenadas(int[][] coordenadas) {
         //coordenadas = array;
         for (int i = 0; i < coordenadas.length; i++) {
@@ -93,7 +95,7 @@ class Transportador {
         return coordenadas;
     }
 
-    /*
+
     public Transportador calcularMasCercano(){
         Transportador masCercano = null;
         double distanciaMasCercana = Double.MAX_VALUE;
@@ -110,7 +112,6 @@ class Transportador {
     }
 
 
-     */
 
     /*public int trobarTele(int numTele, int[][] cordTele) {
 

@@ -79,8 +79,10 @@ public class Robot extends Bender {
                 //S
                 if (plano[iniciY + 1][iniciX] =='T') {
                     //Troba un Transportador
-                    //Transportador transportar= calcularMasCercano();
-                    //System.out.println(transportar);
+                    Transportador transportador1;
+                    transportador= new Transportador[]{calcularMasCercano()};
+
+
                     iniciY++;
                     resultat += Orientacio.S.name();
                     viatgeAmbTransportador();
@@ -196,8 +198,6 @@ public class Robot extends Bender {
     }
 
     public void viatgeAmbTransportador() {
-
-
         for (int i = 0; i < cordTele.length; i++) {
             int x2 = cordTele[i][0];
             int y2 = cordTele[i][1];
@@ -206,7 +206,8 @@ public class Robot extends Bender {
                 iniciY = y2;
                 break;
             } else {
-                throw new RuntimeException("NO SE POT TELETRANSPORTAR PER ARA");
+                calcularMasCercano();
+                //throw new RuntimeException("NO SE POT TELETRANSPORTAR PER ARA");
             }
         }
     }
@@ -241,6 +242,7 @@ public class Robot extends Bender {
         }
         return masCercano;
     }
+
 /*
         } else if (orientacio == orientacio.E) {
             //EST
