@@ -134,6 +134,8 @@ public class Bender {
            transportador[i] = new Transportador(telx,telY);
         }
 
+        //Bucle que guarda la distancia entre tots els teletransportadors i el guarda a xMesAprop i yMesAprop
+
 
         /*
         for (int i = 0; i < cordTele.length; i++) {

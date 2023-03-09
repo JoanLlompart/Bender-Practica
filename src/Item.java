@@ -70,12 +70,18 @@ class Transportador extends Bender{
 
     int x;
     int y;
+    int xMesProper;
+    int yMesProper;
+
     int[][] coordenadas;
-     public Transportador(int x, int y) {
+     public Transportador(int x, int y,int xMesProper,int yMesProper) {
          this.x = x;
          this.y = y;
+         this.xMesProper=xMesProper;
+         this.yMesProper=yMesProper;
 
     }
+
 
     public Transportador(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano, int[][] cordTele, Transportador[] transportador) {
         super(iniciX, iniciY, finalX, finalY, resultat, plano, cordTele, transportador);
@@ -83,6 +89,11 @@ class Transportador extends Bender{
 
 
     int [][]totes= rellenarCord(x,y,coordenadas);
+
+    public Transportador(int telx, int telY) {
+
+    }
+
     private int[][] rellenarCord(int x, int y, int[][] coordenadas) {
 
         for (int i = 0; i < numTele; i++) {
@@ -93,13 +104,15 @@ class Transportador extends Bender{
         return coordenadas;
     }
 
-    public void setCoordenadas(int[][] coordenadas) {
+   /* public void setCoordenadas(int[][] coordenadas) {
         //coordenadas = array;
         for (int i = 0; i < coordenadas.length; i++) {
             coordenadas[i][0] = x;
             coordenadas[i][1] = y;
         }
     }
+
+    */
 
     public int[][] getCoordenadas() {
         return coordenadas;
@@ -115,7 +128,7 @@ class Transportador extends Bender{
             double distancia = Math.sqrt(Math.pow(x2 - x, 2) + Math.pow(y2 - y, 2));
             if (distancia < distanciaMasCercana) {
                 distanciaMasCercana = distancia;
-                masCercano = new Transportador(x2, y2);
+                masCercano = new Transportador(x2, y2,xMesProper,yMesProper);
             }
         }
         return masCercano;
@@ -151,7 +164,6 @@ class Transportador extends Bender{
         }
         return numTele;
     }
-
 
      */
 }
