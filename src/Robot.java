@@ -229,8 +229,8 @@ public class Robot extends Bender {
                     //implementar el constructor
                    // Transportador transportar= calcularMasCercano();
                    // System.out.println(transportar + "west transport");
-                    Transportador transportadorActual = new Transportador(iniciX, iniciY);
-                    transportador= new Transportador[]{trobaTeleProper(transportador,transportadorActual)};
+                    //Transportador transportadorActual = new Transportador(iniciX, iniciY);
+                    //transportador= new Transportador[]{trobaTeleProper(transportador,transportadorActual)};
 
                     //Avançam la posicio per entrar al transportador
                     iniciX--;
@@ -278,7 +278,7 @@ public class Robot extends Bender {
                 iniciY = y2;
                 break;
             } else {
-                trobaTeleProper(transportador,transportadorActual);
+                //trobaTeleProper(transportador,transportadorActual);
                 //throw new RuntimeException("NO SE POT TELETRANSPORTAR PER ARA");
             }
         }
@@ -341,33 +341,6 @@ public class Robot extends Bender {
     }
 
     */
-    public Transportador trobaTeleProper(Transportador[] transportador, Transportador transportadorActual) {
-        double distanciaMinima = Double.MAX_VALUE;
-        Transportador transportadorMasCercano = null;
-
-        // forEach fa referencia a el array de Transportador
-        for (Transportador t : transportador) {
-            if (t != transportadorActual) {
-                double distancia = calcularDistancia(t, transportadorActual);
-                if (distancia < distanciaMinima) {
-                    distanciaMinima = distancia;
-                    transportadorMasCercano = t;
-                }
-            }
-        }
-        // Actualitza el transportador actual per el mes proper
-        transportadorActual = transportadorMasCercano;
-
-        return transportadorMasCercano;
-    }
-
-
-    private double calcularDistancia(Transportador t1, Transportador t2) {
-        double dx = t1.getX() - t2.getX();
-        double dy = t1.getY() - t2.getY();
-        //pitagores per comparar les distancies entre el transportador actual i els altres de el array.
-        return Math.sqrt(dx * dx + dy * dy);
-    }
 
 /*
         } else if (orientacio == orientacio.E) {

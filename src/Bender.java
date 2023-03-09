@@ -123,8 +123,8 @@ public class Bender {
         Transportador[] transportador = new Transportador[numTele];
         
 
-        int[][] cordTeleT = trobarItems(plano, cordInicial,cordFinal,cordTele);
-        cordTele = cordTeleT;
+         trobarItems(plano, cordInicial,cordFinal,cordTele);
+        //cordTele = cordTeleT;
 
         //Bucle per crear els objectes Transportador,
         // i assignar valors x i y a cada transportador.
@@ -132,7 +132,26 @@ public class Bender {
            int telx= cordTele[i][0];
            int telY =cordTele[i][1];
            transportador[i] = new Transportador(telx,telY);
+
         }
+
+        for (int i = 0; i < cordTele.length; i++) {
+            Transportador t = trobaTeleProper(transportador, transportador[i]);
+            transportador[i].xMesProper = t.x;
+            transportador[i].yMesProper = t.y;
+
+        }
+
+
+       /* for (int i = 0; i < transportador.length; i++) {
+            for (int j = 0; j < transportador[i].; j++) {
+                transportador[i] =
+            }
+
+            //Transportador actual = new Transportador()
+        }
+
+        */
 
         //Bucle que guarda la distancia entre tots els teletransportadors i el guarda a xMesAprop i yMesAprop
 
@@ -206,7 +225,7 @@ public class Bender {
         }
         return numTele;
     }
-    public int[][] trobarItems(char[][] plano, int[] cordInicial, int[] cordFinal, int[][] cordTele) {
+    public void trobarItems(char[][] plano, int[] cordInicial, int[] cordFinal, int[][] cordTele) {
         // Primer bucle yPos es la fila
         //Contador per sebre el numero de Transportador que hem trobat.
         int contemp =0;
@@ -240,8 +259,36 @@ public class Bender {
 
             }
         }
-        return cordTele;
+     //  çç return cordTele;
     }
+    public Transportador trobaTeleProper(Transportador[] transportador, Transportador transportadorActual) {
+        double distanciaMinima = Double.MAX_VALUE;
+        Transportador transportadorMasCercano = null;
+
+        // forEach fa referencia a el array de Transportador
+        for (Transportador t : transportador) {
+            if (t != transportadorActual) {
+                double distancia = calcularDistancia(t, transportadorActual);
+                if (distancia < distanciaMinima) {
+                    distanciaMinima = distancia;
+                    transportadorMasCercano = t;
+                }
+            }
+        }
+        // Actualitza el transportador actual per el mes proper
+        transportadorActual = transportadorMasCercano;
+
+        return transportadorMasCercano;
+    }
+
+
+    private double calcularDistancia(Transportador t1, Transportador t2) {
+        double dx = t1.getX() - t2.getX();
+        double dy = t1.getY() - t2.getY();
+        //pitagores per comparar les distancies entre el transportador actual i els altres de el array.
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+
     int bestRun() {
         return 0;
     }
