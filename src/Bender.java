@@ -12,6 +12,8 @@ public class Bender {
     int[][] cordTele;
     String resultat = "";
     Transportador[] transportador;
+
+    //Constructor que utilitza Robot i Item per heretar.
     public Bender(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano,int[][] cordTele,Transportador[] transportador) {
         this.plano = plano;
         this.iniciX = iniciX;
@@ -21,7 +23,6 @@ public class Bender {
         this.resultat = resultat;
         this.cordTele = cordTele;
         this.transportador = transportador;
-
 
     }
 
@@ -201,24 +202,11 @@ public class Bender {
                 }
             }
         }
-        /*for (int posY = 0; posY < plano.length; posY++) {
-            for (int posX = 0; posX < plano[posY].length; posX++) {
-                if (plano[posY][posX] == 'T'){
-                    int i =0;
-                        cordTele[i][0] = posX;
-                        cordTele[i][1] = posY;
-                    i++;
-                }
-
-            }
-
-        }
-
-         */
         return numTele;
     }
     public int[][] trobarItems(char[][] plano, int[] cordInicial, int[] cordFinal, int[][] cordTele) {
         // Primer bucle yPos es la fila
+        //Contador per sebre el numero de Transportador que hem trobat.
         int contemp =0;
         for (int posFila = 0; posFila < plano.length; posFila++) {
             //Segon bucle per trobar la cordenada X columna
@@ -226,21 +214,23 @@ public class Bender {
                 if (plano[posFila][posCol] =='X') {
                     cordInicial[0] = posCol;
                     cordInicial[1] = posFila;
-                    //return cordInici;
+
                 }
                 if (plano[posFila][posCol] == '$') {
+                    // Guarda la posicio X
                     cordFinal[0] = posCol;
+                    // Guarda la posicio Y
                     cordFinal[1] = posFila;
 
                     //per deixar de recorre el mapa i optimitzar el programa.
-                    //break;
                 }
                 if (plano[posFila][posCol] == 'T') {
                     // Guarda la posicio X
                     cordTele[contemp][0] = posCol;
                     // Guarda la posicio Y
                     cordTele[contemp][1] = posFila;
-                   // transportador[contemp] = new Transportador(posCol, posFila);
+                    //Aumenta el contador temporal per pasar a la següent posicio de el array,
+                    // ja que es un nou transportador i se guardara a una fila diferent.
                     contemp++;
                 }
 

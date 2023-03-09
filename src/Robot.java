@@ -58,21 +58,16 @@ public class Robot extends Bender {
 
         }
     }
-
-
-    public void setHaArribat(boolean haArribat) {
-        this.haArribat = haArribat;
-    }
-
     public String walk() {
         //ha de cambiar la seva posicio si pot.
         // si la posicio esta lliure podem avançar i cambiara la posicio de X i Y.
 
-
-        int cont = 0;
+        //El enum direccio de tipus Orientacio sempre començara per el sud.
         Orientacio direccio = Orientacio.S;
-        //direccio = Orientacio.S;
-        boolean inversor=false;
+
+        // Si el inversor esta activat altera el ordre de les prefrencias de direccio.
+        //ordre Inversor N,W,S,E
+        boolean inversor = false;
         while (!haArribat) {
             // El probrama cada vegada que troba una paret ha de tornar a comensar el ordre cap el sur.
 
@@ -80,15 +75,21 @@ public class Robot extends Bender {
             if (direccio == Orientacio.S) {
                 //Si troba un inversor el la seguent casella
                 if (plano[iniciY + 1][iniciX] =='I') {
-                    //Activa boolean inversor
-                    inversor = true;
+                    //Si el inversor ja esta activat se ha de desactivar.
+                    if (inversor== true) {
+                        inversor = false;
+                    }else {
+                        //Si el inversor no esta activat el activam.
+                        //Activa boolean inversor
+                        inversor = true;
+                    }
                 }
                 //S
                 if (plano[iniciY + 1][iniciX] =='T') {
                     //Troba un Transportador
-                    Transportador transportador1;
-                    transportador= new Transportador[]{calcularMasCercano()};
-
+                    //transportador= new Transportador[]{calcularMasCercano()};
+                    Transportador transportadorActual = new Transportador(iniciX, iniciY+1);
+                    transportador= new Transportador[]{trobaTeleProper(transportador,transportadorActual)};
 
                     iniciY++;
                     resultat += Orientacio.S.name();
@@ -120,14 +121,21 @@ public class Robot extends Bender {
 
             if (direccio == Orientacio.E) {
                 if (plano[iniciY][iniciX+1] =='I') {
-                    inversor = true;
-                    //direccioInversa(plano, iniciY, iniciX, direccio);
+                    if (inversor== true) {
+                        inversor = false;
+                    }else {
+                        //Si el inversor no esta activat el activam.
+                        //Activa boolean inversor
+                        inversor = true;
+                    };
                 }
                 //EAST
                 if (plano[iniciY][iniciX+1] =='T') {
                     //Troba un Transportador
                     //Transportador transportar= calcularMasCercano();
                     //System.out.println(transportar + "Est transport");
+                    Transportador transportadorActual = new Transportador(iniciX+1, iniciY);
+                    transportador= new Transportador[]{trobaTeleProper(transportador,transportadorActual)};
 
                     //Avançam la posicio per entrar al transportador
                     iniciX++;
@@ -158,13 +166,21 @@ public class Robot extends Bender {
             //NORTH
             if (direccio == Orientacio.N) {
                 if (plano[iniciY -1][iniciX] =='I') {
-                    inversor = true;
+                    if (inversor== true) {
+                        inversor = false;
+                    }else {
+                        //Si el inversor no esta activat el activam.
+                        //Activa boolean inversor
+                        inversor = true;
+                    }
                 }
 
                 if (plano[iniciY - 1][iniciX] =='T') {
                     //Troba un Transportador
                     //Transportador transportar= calcularMasCercano();
                     //System.out.println(transportar + "North transport");
+                    Transportador transportadorActual = new Transportador(iniciX, iniciY-1);
+                    transportador= new Transportador[]{trobaTeleProper(transportador,transportadorActual)};
 
                     //Avançam la posicio per entrar al transportador
                     iniciY--;
@@ -194,7 +210,13 @@ public class Robot extends Bender {
             if (direccio == Orientacio.W) {
 
                 if (plano[iniciY][iniciX-1] =='I') {
-                    inversor = true;
+                    if (inversor== true) {
+                        inversor = false;
+                    }else {
+                        //Si el inversor no esta activat el activam.
+                        //Activa boolean inversor
+                        inversor = true;
+                    }
                 }
                 //WEST
                 if (plano[iniciY][iniciX-1] =='T') {
@@ -205,6 +227,8 @@ public class Robot extends Bender {
                     //implementar el constructor
                    // Transportador transportar= calcularMasCercano();
                    // System.out.println(transportar + "west transport");
+                    Transportador transportadorActual = new Transportador(iniciX, iniciY);
+                    transportador= new Transportador[]{trobaTeleProper(transportador,transportadorActual)};
 
                     //Avançam la posicio per entrar al transportador
                     iniciX--;
@@ -251,8 +275,10 @@ public class Robot extends Bender {
                 iniciY = y2;
                 break;
             } else {
-                calcularMasCercano();
+                //calcularMasCercano();
+
                 //throw new RuntimeException("NO SE POT TELETRANSPORTAR PER ARA");
+
             }
         }
     }
@@ -298,7 +324,7 @@ public class Robot extends Bender {
 
 
 
-    public Transportador calcularMasCercano(){
+   /* public Transportador calcularMasCercano(){
         Transportador masCercano = null;
         double distanciaMasCercana = Double.MAX_VALUE;
         for (int i = 0; i < cordTele.length; i++) {
@@ -313,6 +339,29 @@ public class Robot extends Bender {
         return masCercano;
     }
 
+    */
+    public Transportador trobaTeleProper(Transportador[] transportadores, Transportador transportadorActual) {
+        double distanciaMinima = Double.MAX_VALUE;
+        Transportador transportadorMasCercano = null;
+
+        for (Transportador t : transportadores) {
+            if (t != transportadorActual) {
+                double distancia = calcularDistancia(t, transportadorActual);
+                if (distancia < distanciaMinima) {
+                    distanciaMinima = distancia;
+                    transportadorMasCercano = t;
+                }
+            }
+        }
+
+        return transportadorMasCercano;
+    }
+
+    private double calcularDistancia(Transportador t1, Transportador t2) {
+        double dx = t1.getX() - t2.getX();
+        double dy = t1.getY() - t2.getY();
+        return Math.sqrt(dx * dx + dy * dy);
+    }
 /*
         } else if (orientacio == orientacio.E) {
             //EST

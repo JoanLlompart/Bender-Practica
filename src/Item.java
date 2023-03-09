@@ -70,7 +70,7 @@ class Transportador extends Bender{
 
     int x;
     int y;
-    private static int[][] coordenadas;
+    int[][] coordenadas;
      public Transportador(int x, int y) {
          this.x = x;
          this.y = y;
@@ -82,16 +82,26 @@ class Transportador extends Bender{
     }
 
 
+    int [][]totes= rellenarCord(x,y,coordenadas);
+    private int[][] rellenarCord(int x, int y, int[][] coordenadas) {
+
+        for (int i = 0; i < numTele; i++) {
+            for (int j = 0; j < 2; j++) {
+                coordenadas[i][j]= cordTele[i][j];
+            }
+        }
+        return coordenadas;
+    }
+
     public void setCoordenadas(int[][] coordenadas) {
         //coordenadas = array;
         for (int i = 0; i < coordenadas.length; i++) {
             coordenadas[i][0] = x;
-            coordenadas[i][0] = y;
+            coordenadas[i][1] = y;
         }
-
     }
 
-    public static int[][] getCoordenadas() {
+    public int[][] getCoordenadas() {
         return coordenadas;
     }
 
@@ -109,6 +119,14 @@ class Transportador extends Bender{
             }
         }
         return masCercano;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getX() {
+        return x;
     }
 
 
