@@ -25,7 +25,7 @@ public class Bender {
         this.transportador = transportador;
 
     }
-
+//Constructor que utilitzam per la classe Item.
     public Bender() {
     }
 
@@ -55,11 +55,6 @@ public class Bender {
 
 
  */
-
-
-
-
-
     }
     //Hem de pasar el mapa a array bidimensional
 
@@ -73,11 +68,31 @@ public class Bender {
         //ha de estar declarada com a variable de clase
         //planol= new String[][]{mapa.split("\n")};
         String[] posicio = mapa.split("\n");
+
+        int logitudMapa = posicio[0].length();
+        for (int i = 0; i < posicio.length-1; i++) {
+            if (logitudMapa > posicio[i + 1].length()) {
+                logitudMapa = posicio[i].length();
+            } else {
+                logitudMapa = posicio[i +1].length();
+            }
+
+        }
         int filasN = posicio.length;
+        int colN = posicio[0].length();
+        plano = new char[posicio.length][logitudMapa];
+
+
+        for (int i = 0; i < posicio.length; i++) {
+            plano[i] = posicio[i].toCharArray();
+        }
+
+       /* int filasN = posicio.length;
         int colN = posicio[0].length();
         plano = new char[filasN][colN];
 
-
+        */
+/*
         //Rellena el Array amb els valors de el String
         for (int Fila = 0; Fila < posicio.length; Fila++) {
             for (int Col = 0; Col < posicio[Fila].length(); Col++) {
@@ -85,6 +100,8 @@ public class Bender {
                 plano[Fila][Col] = posicio[Fila].charAt(Col);
             }
         }
+
+ */
         //Crear un mapa de items de les mateixes dimensions que el mapa de caracters
     }
 
@@ -273,6 +290,13 @@ public class Bender {
                 if (distancia < distanciaMinima) {
                     distanciaMinima = distancia;
                     transportadorMasCercano = t;
+                } else if (distancia == distancia) {
+                    //calcular distancia amb producte euclania que vagi en el sentit de les agulles de el rellotge
+                    double productoEuclidiano = calcularProductoEuclidiano(t, transportadorActual);
+                    double ratio = productoEuclidiano / (distancia * distancia);
+                    if (ratio < (calcularProductoEuclidiano(transportadorMasCercano, transportadorActual) / (distanciaMinima * distanciaMinima))) {
+                        transportadorMasCercano = t;
+                    }
                 }
             }
         }
@@ -288,6 +312,12 @@ public class Bender {
         double dy = t1.getY() - t2.getY();
         //pitagores per comparar les distancies entre el transportador actual i els altres de el array.
         return Math.sqrt(dx * dx + dy * dy);
+    }
+
+    private double calcularProductoEuclidiano(Transportador t1, Transportador t2) {
+        double dx = t1.getX() - t2.getX();
+        double dy = t1.getY() - t2.getY();
+        return dx * dx + dy * dy;
     }
 
     int bestRun() {

@@ -209,7 +209,8 @@ public class BenderTest {
         Bender bender = new Bender(mapa);
         assertEquals("SEENNNNNWWWWSSSS", bender.run());
     }
-/*
+
+   /*
     @Test
     public void test14() {
         // Irregular
@@ -228,7 +229,7 @@ public class BenderTest {
     }
 
 
- */
+     */
 /*
     @Test
     public void test15() {

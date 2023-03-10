@@ -19,15 +19,6 @@ public class Robot extends Bender {
         W;
     }
 
-    //char sud = 'S';
-
-    //char east = 'E';
-
-    //char north = 'N';
-
-    // char west = 'W';
-
-
     // haArribat variable boolean.
     boolean haArribat = haArribat(iniciY, iniciX, finalY, finalX);
 
@@ -87,10 +78,6 @@ public class Robot extends Bender {
                 //S
                 if (plano[iniciY + 1][iniciX] =='T') {
                     //Troba un Transportador
-                    //transportador= new Transportador[]{calcularMasCercano()};
-                    //Transportador transportadorActual = new Transportador(iniciX, iniciY+1);
-                    //transportador= new Transportador[]{trobaTeleProper(transportador,transportadorActual)};
-                    //Transportador transportador1 = trobaTeleProper(transportador,transportadorActual);
                     iniciY++;
                     resultat += Orientacio.S.name();
                     viatgeAmbTransportador();
@@ -121,6 +108,8 @@ public class Robot extends Bender {
 
             if (direccio == Orientacio.E) {
                 if (plano[iniciY][iniciX+1] =='I') {
+                    //Si esta activat el inversor i troba un altre se desactivara i
+                    // tornara al sentit normal
                     if (inversor== true) {
                         inversor = false;
                     }else {
@@ -161,6 +150,8 @@ public class Robot extends Bender {
             //NORTH
             if (direccio == Orientacio.N) {
                 if (plano[iniciY -1][iniciX] =='I') {
+                    //Si esta activat el inversor i troba un altre se desactivara i
+                    // tornara al sentit normal
                     if (inversor== true) {
                         inversor = false;
                     }else {
@@ -199,7 +190,7 @@ public class Robot extends Bender {
             if (direccio == Orientacio.W) {
 
                 if (plano[iniciY][iniciX-1] =='I') {
-                    if (inversor== true) {
+                    if (inversor) {
                         inversor = false;
                     }else {
                         //Si el inversor no esta activat el activam.
@@ -225,7 +216,9 @@ public class Robot extends Bender {
                         direccio = novaInversa;
 
                     } else {
+                        // Si el inversor es false segueix amb el sentit normal
                         // Si hi ha una paret a la seguent posicio cambia de sentit
+
                         Orientacio novaDireccio = potAnarDireccio(plano, iniciY, iniciX, direccio);
                         direccio = novaDireccio;
                     }
@@ -258,27 +251,8 @@ public class Robot extends Bender {
                 iniciX = transportador[i].xMesProper;
                 iniciY = transportador[i].yMesProper;
                 break;
-            } else {
-                continue;
-            }
-
-        }
-        /*
-        //Transportador  transportadorActual = new Transportador(iniciX,iniciY);
-        for (int i = 0; i < cordTele.length; i++) {
-            int x2 = cordTele[i][0];
-            int y2 = cordTele[i][1];
-            if (iniciX != x2 && iniciY != y2 ) {
-                iniciX = x2;
-                iniciY = y2;
-                break;
-            } else {
-                //trobaTeleProper(transportador,transportadorActual);
-                throw new RuntimeException("NO SE POT TELETRANSPORTAR PER ARA");
             }
         }
-
-         */
     }
 
     public Orientacio potAnarDireccio(char[][] plano, int iniciY, int iniciX, Orientacio direccio) {
@@ -313,31 +287,6 @@ public class Robot extends Bender {
         }
         return direccio;
     }
-
-
-
-
-
-
-
-
-
-   /* public Transportador calcularMasCercano(){
-        Transportador masCercano = null;
-        double distanciaMasCercana = Double.MAX_VALUE;
-        for (int i = 0; i < cordTele.length; i++) {
-            int x2 = cordTele[i][0];
-            int y2 = cordTele[i][1];
-            double distancia = Math.sqrt(Math.pow(x2 - iniciX, 2) + Math.pow(y2 - iniciY, 2));
-            if (distancia < distanciaMasCercana) {
-                distanciaMasCercana = distancia;
-                masCercano = new Transportador(x2, y2);
-            }
-        }
-        return masCercano;
-    }
-
-    */
 
 /*
         } else if (orientacio == orientacio.E) {
@@ -434,25 +383,7 @@ public class Robot extends Bender {
        }
  */
 //------------------------------------------------------------
-    private void canviOrientacio(Orientacio direccio, int cont) {
-        if (cont == 4) {
-            cont = 0;
-        }
-        switch (cont) {
-            case 0:
-                direccio = Orientacio.S;
-                break;
-            case 1:
-                direccio = Orientacio.E;
-                break;
-            case 2:
-                direccio = Orientacio.N;
-                break;
-            case 3:
-                direccio = Orientacio.W;
-                break;
-        }
-    }
+
 }
 
 
