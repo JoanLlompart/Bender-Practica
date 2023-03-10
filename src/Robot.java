@@ -131,15 +131,10 @@ public class Robot extends Bender {
                 }
                 //EAST
                 if (plano[iniciY][iniciX+1] =='T') {
-                    //Troba un Transportador
-                    //Transportador transportar= calcularMasCercano();
-                    //System.out.println(transportar + "Est transport");
-                    //Transportador transportadorActual = new Transportador(iniciX+1, iniciY);
-                    //transportador= new Transportador[]{trobaTeleProper(transportador,transportadorActual)};
-
                     //Avançam la posicio per entrar al transportador
                     iniciX++;
                     resultat += Orientacio.E.name();
+
                     viatgeAmbTransportador();
 
                     //break;
@@ -177,18 +172,10 @@ public class Robot extends Bender {
 
                 if (plano[iniciY - 1][iniciX] =='T') {
                     //Troba un Transportador
-                    //Transportador transportar= calcularMasCercano();
-                    //System.out.println(transportar + "North transport");
-
-                    //Transportador transportadorActual = new Transportador(iniciX, iniciY-1);
-                    //transportador= new Transportador[]{trobaTeleProper(transportador,transportadorActual)};
-
                     //Avançam la posicio per entrar al transportador
                     iniciY--;
                     resultat += Orientacio.N.name();
-
                     viatgeAmbTransportador();
-
                    // break;
                 }
                 if (plano[iniciY - 1][iniciX] == '#') {
@@ -225,13 +212,6 @@ public class Robot extends Bender {
                     //Troba un Transportador
                     // Ja ha de estar creat i se ha de implementar una funcio que calculi la distancia
                     // amb el teorema de pitagoras
-
-                    //implementar el constructor
-                   // Transportador transportar= calcularMasCercano();
-                   // System.out.println(transportar + "west transport");
-                    //Transportador transportadorActual = new Transportador(iniciX, iniciY);
-                    //transportador= new Transportador[]{trobaTeleProper(transportador,transportadorActual)};
-
                     //Avançam la posicio per entrar al transportador
                     iniciX--;
                     resultat += Orientacio.W.name();
@@ -269,7 +249,22 @@ public class Robot extends Bender {
     }
 
     public void viatgeAmbTransportador() {
-        Transportador  transportadorActual = new Transportador(iniciX,iniciY);
+
+        for (int i = 0; i < transportador.length; i++) {
+            //Si la posicio actual consideix amb la posicio de algun transportador entra perque ha trobat el transportador Actual
+            // i aixi podrem accedir a la posicions xMesProper i yMesProper de aquest perque es teletransporti.
+            if (transportador[i].x == iniciX && transportador[i].y == iniciY) {
+                // Canviam els valors de iniciX i iniciY per els de el transportador mes proxim.
+                iniciX = transportador[i].xMesProper;
+                iniciY = transportador[i].yMesProper;
+                break;
+            } else {
+                continue;
+            }
+
+        }
+        /*
+        //Transportador  transportadorActual = new Transportador(iniciX,iniciY);
         for (int i = 0; i < cordTele.length; i++) {
             int x2 = cordTele[i][0];
             int y2 = cordTele[i][1];
@@ -279,9 +274,11 @@ public class Robot extends Bender {
                 break;
             } else {
                 //trobaTeleProper(transportador,transportadorActual);
-                //throw new RuntimeException("NO SE POT TELETRANSPORTAR PER ARA");
+                throw new RuntimeException("NO SE POT TELETRANSPORTAR PER ARA");
             }
         }
+
+         */
     }
 
     public Orientacio potAnarDireccio(char[][] plano, int iniciY, int iniciX, Orientacio direccio) {

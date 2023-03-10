@@ -115,16 +115,16 @@ public class Bender {
 
         // Arrays de cordenades Teletransportador('T')
         cordTele = new int[ntele][2];
-        int teleX;
-        int teleY;
+
+
         //Cridam a la funcio que pasant el planol torna un array amb les cordenades.
 
         // Cream un array de Objectes Transportador
         Transportador[] transportador = new Transportador[numTele];
         
-
-        int[][] cordTeleT= trobarItems(plano, cordInicial,cordFinal,cordTele);
-         cordTele = cordTeleT;
+         trobarItems(plano,cordInicial,cordFinal,cordTele);
+        //int[][] cordTeleT= trobarItems(plano, cordInicial,cordFinal,cordTele);
+         //cordTele = cordTeleT;
 
         //Bucle per crear els objectes Transportador,
         // i assignar valors x i y a cada transportador.
@@ -135,6 +135,7 @@ public class Bender {
 
         }
 
+        //Bucle per guardar dins cada Transportador les coordenades de el mes proxim.
         for (int i = 0; i < cordTele.length; i++) {
             Transportador t = trobaTeleProper(transportador, transportador[i]);
             transportador[i].xMesProper = t.x;
@@ -225,7 +226,7 @@ public class Bender {
         }
         return numTele;
     }
-    public int[][] trobarItems(char[][] plano, int[] cordInicial, int[] cordFinal, int[][] cordTele) {
+    public void trobarItems(char[][] plano, int[] cordInicial, int[] cordFinal, int[][] cordTele) {
         // Primer bucle yPos es la fila
         //Contador per sebre el numero de Transportador que hem trobat.
         int contemp =0;
@@ -259,7 +260,7 @@ public class Bender {
 
             }
         }
-        return cordTele;
+        //return cordTele;
     }
     public Transportador trobaTeleProper(Transportador[] transportador, Transportador transportadorActual) {
         double distanciaMinima = Double.MAX_VALUE;
