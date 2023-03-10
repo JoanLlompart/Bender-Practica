@@ -123,8 +123,8 @@ public class Bender {
         Transportador[] transportador = new Transportador[numTele];
         
 
-         trobarItems(plano, cordInicial,cordFinal,cordTele);
-        //cordTele = cordTeleT;
+        int[][] cordTeleT= trobarItems(plano, cordInicial,cordFinal,cordTele);
+         cordTele = cordTeleT;
 
         //Bucle per crear els objectes Transportador,
         // i assignar valors x i y a cada transportador.
@@ -225,7 +225,7 @@ public class Bender {
         }
         return numTele;
     }
-    public void trobarItems(char[][] plano, int[] cordInicial, int[] cordFinal, int[][] cordTele) {
+    public int[][] trobarItems(char[][] plano, int[] cordInicial, int[] cordFinal, int[][] cordTele) {
         // Primer bucle yPos es la fila
         //Contador per sebre el numero de Transportador que hem trobat.
         int contemp =0;
@@ -259,7 +259,7 @@ public class Bender {
 
             }
         }
-     //  çç return cordTele;
+        return cordTele;
     }
     public Transportador trobaTeleProper(Transportador[] transportador, Transportador transportadorActual) {
         double distanciaMinima = Double.MAX_VALUE;
@@ -276,7 +276,7 @@ public class Bender {
             }
         }
         // Actualitza el transportador actual per el mes proper
-        transportadorActual = transportadorMasCercano;
+       // transportadorActual = transportadorMasCercano;
 
         return transportadorMasCercano;
     }

@@ -87,12 +87,20 @@ class Transportador extends Bender{
         super(iniciX, iniciY, finalX, finalY, resultat, plano, cordTele, transportador);
     }
 
+    public Transportador(int x, int y) {
+         this.x=x;
+         this.y=y;
+    }
 
-    int [][]totes= rellenarCord(x,y,coordenadas);
 
-    public Transportador(int telx, int telY) {
+    //int [][]totes= rellenarCord(x,y,coordenadas);
+
+   /* public Transportador(int telx, int telY) {
+
 
     }
+
+    */
 
     private int[][] rellenarCord(int x, int y, int[][] coordenadas) {
 
