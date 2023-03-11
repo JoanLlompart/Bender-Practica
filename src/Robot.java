@@ -241,17 +241,17 @@ public class Robot extends Bender {
 
         if (plano[iniciY + 1][iniciX] != '#') {
             //si la següent posicio se pot anara a el sud, anar a el sud,
-            return direccio = Orientacio.S;
+            direccio = Orientacio.S;
         } else if (plano[iniciY][iniciX + 1] != '#') {
             // segona preferencia es el est
-            return direccio = Orientacio.E;
+            direccio = Orientacio.E;
         } else if (plano[iniciY - 1][iniciX] != '#') {
             //tercera preferencia es el nord
-            return direccio = Orientacio.N;
+            direccio = Orientacio.N;
 
         } else if (plano[iniciY][iniciX - 1] != '#') {
             // cuarta preferencia es el oest
-            return direccio = Orientacio.W;
+            direccio = Orientacio.W;
         }
         return direccio;
     }
@@ -261,13 +261,13 @@ public class Robot extends Bender {
 
         //ordre N,W,S,E
         if (plano[iniciY - 1][iniciX] != '#') {
-            return direccio = Orientacio.N;
+            direccio = Orientacio.N;
         } else if (plano[iniciY][iniciX - 1] != '#') {
-            return direccio = Orientacio.W;
+            direccio = Orientacio.W;
         } else if (plano[iniciY + 1][iniciX] != '#') {
-            return direccio = Orientacio.S;
+            direccio = Orientacio.S;
         } else if (plano[iniciY][iniciX + 1] != '#') {
-            return direccio = Orientacio.E;
+            direccio = Orientacio.E;
         }
         return direccio;
     }
