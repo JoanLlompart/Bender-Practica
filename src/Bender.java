@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class Bender {
 
     // DECLAREM VARIABLES DE CLASE
@@ -25,12 +23,13 @@ public class Bender {
         this.transportador = transportador;
 
     }
-//Constructor que utilitzam per la classe Item.
+
+    //Constructor que utilitzam per la classe Item.
     public Bender() {
     }
 
     public static void main(String[] args) {
-        String mapa =  "" +
+        String mapa = "" +
                 "###########\n" +
                 "#         #\n" +
                 "#  ########\n" +
@@ -71,11 +70,11 @@ public class Bender {
 
         int logitudMapa = posicio[0].length();
         //determinar la longitut de la fila mes curta del mapa
-        for (int i = 0; i < posicio.length-1; i++) {
+        for (int i = 0; i < posicio.length - 1; i++) {
             if (logitudMapa > posicio[i + 1].length()) {
                 logitudMapa = posicio[i].length();
             } else {
-                logitudMapa = posicio[i +1].length();
+                logitudMapa = posicio[i + 1].length();
             }
 
         }
@@ -108,7 +107,6 @@ public class Bender {
     }
 
 
-
     // Navegar fins a l'objectiu («$»).
     // El valor retornat pel mètode consisteix en una cadena de
     // caràcters on cada lletra pot tenir
@@ -128,7 +126,7 @@ public class Bender {
         int[] cordFinal = new int[2];
 
         //calcula la cantidad de transportador
-        int ntele =cercaCantidadTele();
+        int ntele = cercaCantidadTele();
         //cordTele = arrayTele;
         numTele = ntele;
 
@@ -140,15 +138,16 @@ public class Bender {
 
         // Cream un array de Objectes Transportador
         Transportador[] transportador = new Transportador[numTele];
-        
-         trobarItems(plano,cordInicial,cordFinal,cordTele);
+
+        //Crida a la funci que guarda les cordenades de inici, les de final, i els tranportadors.
+        trobarItems(plano, cordInicial, cordFinal, cordTele);
 
         //Bucle per crear els objectes Transportador,
         // i assignar valors x i y a cada transportador.
         for (int i = 0; i < cordTele.length; i++) {
-           int telx= cordTele[i][0];
-           int telY =cordTele[i][1];
-           transportador[i] = new Transportador(telx,telY);
+            int telx = cordTele[i][0];
+            int telY = cordTele[i][1];
+            transportador[i] = new Transportador(telx, telY);
 
         }
 
@@ -159,89 +158,41 @@ public class Bender {
             transportador[i].yMesProper = t.y;
 
         }
-
-
-       /* for (int i = 0; i < transportador.length; i++) {
-            for (int j = 0; j < transportador[i].; j++) {
-                transportador[i] =
-            }
-
-            //Transportador actual = new Transportador()
-        }
-
-        */
-
-        //Bucle que guarda la distancia entre tots els teletransportadors i el guarda a xMesAprop i yMesAprop
-
-
-        /*
-        for (int i = 0; i < cordTele.length; i++) {
-            //proba
-           // transportador = new Transportador[]{new Transportador(cordTele[i][0], cordTele[i][1])};
-            teleX = cordTele[i][0];
-            teleY = cordTele[i][1];
-            transportador[i] = new Transportador(teleX, teleY);
-        }
-
-
-         */
-
-
-
-
-
-        //System.out.println(cordTele[0][0] + cordTele[0][1] );
-
-        //int[][] cordTele = trobarItems(plano, cordInicial,cordFinal);
-
+        //Treim els valors de els arrays i les pasam a variables,
+        // robotX i robotY marcara el punt de partida de el Robot per començar a moure en el mapa.
         robotX = cordInicial[0];
         robotY = cordInicial[1];
         finalX = cordFinal[0];
         finalY = cordFinal[1];
 
 
-/*
-        //Guardar les cordenades de el nombre de teletransportadors
-        for (int i = 0; i < cordTele.length; i++) {
-                teleX = cordTele[i][0];
-                teleY = cordTele[i][1];
-                transportador[i] = new Transportador(teleX, teleY);
-
-        }
-
-
- */
-
-
-        //String resultat="";
-
         //Cream el Robot i li pasa, les cordenades inicials.
-        Robot robot = new Robot(robotX, robotY,finalX,finalY,resultat,plano,cordTele,transportador);
+        Robot robot = new Robot(robotX, robotY, finalX, finalY, resultat, plano, cordTele, transportador);
         return robot.walk();
     }
 
+    // Funcio que troba el nombre de 'T' que hi ha a plano per saber la longitut de el Array de Transportadors.
     private int cercaCantidadTele() {
-
         for (int posFila = 0; posFila < plano.length; posFila++) {
             for (int posCol = 0; posCol < plano[posFila].length; posCol++) {
-                if (plano[posFila][posCol] == 'T'){
+                if (plano[posFila][posCol] == 'T') {
                     numTele++;
                 }
             }
         }
         return numTele;
     }
+
     public void trobarItems(char[][] plano, int[] cordInicial, int[] cordFinal, int[][] cordTele) {
         // Primer bucle yPos es la fila
         //Contador per sebre el numero de Transportador que hem trobat.
-        int contemp =0;
+        int contemp = 0;
         for (int posFila = 0; posFila < plano.length; posFila++) {
             //Segon bucle per trobar la cordenada X columna
             for (int posCol = 0; posCol < plano[posFila].length; posCol++) {
-                if (plano[posFila][posCol] =='X') {
+                if (plano[posFila][posCol] == 'X') {
                     cordInicial[0] = posCol;
                     cordInicial[1] = posFila;
-
                 }
                 if (plano[posFila][posCol] == '$') {
                     // Guarda la posicio X
@@ -262,10 +213,8 @@ public class Bender {
                 }
 
 
-
             }
         }
-        //return cordTele;
     }
 
 /*
@@ -302,46 +251,44 @@ public class Bender {
 
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------
-public Transportador trobaTeleProper(Transportador[] transportadores, Transportador transportadorActual) {
-    double distanciaMinima = Double.MAX_VALUE;
-    double ratioMinimo = Double.MAX_VALUE;
-    Transportador transportadorMasCercano = null;
+    public Transportador trobaTeleProper(Transportador[] transportadores, Transportador transportadorActual) {
+        double distanciaMinima = Double.MAX_VALUE;
+        double radiMenor = Double.MAX_VALUE;
+        Transportador transportadorMesProper = null;
 
-    // Calcula la posición del transportador actual
-    double xActual = transportadorActual.getX();
-    double yActual = transportadorActual.getY();
+        // Calcula la posición del transportador actual
+        double xActual = transportadorActual.getX();
+        double yActual = transportadorActual.getY();
 
-    for (Transportador t : transportadores) {
-        if (t != transportadorActual) {
-            double distancia = calcularDistancia(t, transportadorActual);
-            double ratio = calcularRatio(xActual, yActual, t.getX(), t.getY());
+        for (Transportador t : transportadores) {
+            if (t != transportadorActual) {
+                double distancia = calcularDistancia(t, transportadorActual);
+                double radi = calcularRadi(xActual, yActual, t.getX(), t.getY());
 
-            if (distancia < distanciaMinima) {
-                distanciaMinima = distancia;
-                ratioMinimo = ratio;
-                transportadorMasCercano = t;
-            } else if (distancia == distanciaMinima && ratio < ratioMinimo) {
-                ratioMinimo = ratio;
-                transportadorMasCercano = t;
+                if (distancia < distanciaMinima) {
+                    distanciaMinima = distancia;
+                    radiMenor = radi;
+                    transportadorMesProper = t;
+                } else if (distancia == distanciaMinima && radi < radiMenor) {
+                    radiMenor = radi;
+                    transportadorMesProper = t;
+                }
             }
         }
+        return transportadorMesProper;
     }
-
-    return transportadorMasCercano;
-}
-
     private double calcularDistancia(Transportador t1, Transportador t2) {
         double dx = t1.getX() - t2.getX();
         double dy = t1.getY() - t2.getY();
         //pitagores per comparar les distancies entre el transportador actual i els altres de el array.
         return Math.sqrt(dx * dx + dy * dy);
     }
-    private double calcularRatio(double xActual, double yActual, double xDestino, double yDestino) {
+
+    private double calcularRadi(double xActual, double yActual, double xDestino, double yDestino) {
         double dx = xDestino - xActual;
         double dy = yDestino - yActual;
         return dx != 0 ? dy / dx : Double.MAX_VALUE;
     }
-
     int bestRun() {
         return 0;
     }

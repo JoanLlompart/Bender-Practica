@@ -1,9 +1,9 @@
 public class Robot extends Bender {
 
     // hem de guardar la posicio inicial.
-    public Robot(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano, int[][] cordTele,Transportador[] transportador) {
+    public Robot(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano, int[][] cordTele, Transportador[] transportador) {
         //Constructor crida a el contructor de Bender
-        super(iniciX, iniciY, finalX, finalY, resultat, plano,cordTele,transportador);
+        super(iniciX, iniciY, finalX, finalY, resultat, plano, cordTele, transportador);
     }
 
 
@@ -26,29 +26,6 @@ public class Robot extends Bender {
         return finalY == iniciY && finalX == iniciX;
     }
 
-
-    private void canviSentit(int iniciY, int iniciX, Orientacio orientacio) {
-
-        switch (orientacio) {
-            case S:
-                iniciY += 1;
-                resultat += orientacio.S.name();
-                break;
-            case E:
-                iniciX++;
-                resultat += orientacio.E.name();
-                break;
-            case N:
-                iniciY -= 1;
-                resultat += orientacio.N.name();
-                break;
-            case W:
-                resultat += orientacio.W.name();
-                iniciX -= 1;
-                break;
-
-        }
-    }
     public String walk() {
         //ha de cambiar la seva posicio si pot.
         // si la posicio esta lliure podem avançar i cambiara la posicio de X i Y.
@@ -64,33 +41,32 @@ public class Robot extends Bender {
         int contadorMaxIntents = 0;
 
         while (!haArribat) {
-
             //aumentam el contador casa iteracio de el bucle.
             contadorMaxIntents++;
 
             //Sud
-            if (contadorMaxIntents==10000) return null;
+            if (contadorMaxIntents == 10000) return null;
             // El probrama cada vegada que troba una paret ha de tornar a comensar el ordre cap el sur.
             if (direccio == Orientacio.S) {
                 //Si troba un inversor el la seguent casella
-                if (plano[robotY + 1][robotX] =='I') {
+                if (plano[robotY + 1][robotX] == 'I') {
                     //Si el inversor ja esta activat se ha de desactivar.
-                    if (inversor== true) {
+                    if (inversor == true) {
                         inversor = false;
-                    }else {
+                    } else {
                         //Si el inversor no esta activat el activam.
                         //Activa boolean inversor
                         inversor = true;
                     }
                 }
                 //Sud
-                if (plano[robotY + 1][robotX] =='T') {
+                if (plano[robotY + 1][robotX] == 'T') {
                     //Troba un Transportador
                     robotY++;
                     resultat += Orientacio.S.name();
                     viatgeAmbTransportador();
-                   // iniciY++;
-                   // resultat += Orientacio.S.name();
+                    // iniciY++;
+                    // resultat += Orientacio.S.name();
                     //break;
 
                 }
@@ -115,19 +91,20 @@ public class Robot extends Bender {
             }
 
             if (direccio == Orientacio.E) {
-                if (plano[robotY][robotX +1] =='I') {
+                if (plano[robotY][robotX + 1] == 'I') {
                     //Si esta activat el inversor i troba un altre se desactivara i
                     // tornara al sentit normal
-                    if (inversor== true) {
+                    if (inversor == true) {
                         inversor = false;
-                    }else {
+                    } else {
                         //Si el inversor no esta activat el activam.
                         //Activa boolean inversor
                         inversor = true;
-                    };
+                    }
+                    ;
                 }
                 //EAST
-                if (plano[robotY][robotX +1] =='T') {
+                if (plano[robotY][robotX + 1] == 'T') {
                     //Avançam la posicio per entrar al transportador
                     robotX++;
                     resultat += Orientacio.E.name();
@@ -157,19 +134,19 @@ public class Robot extends Bender {
 
             //NORTH
             if (direccio == Orientacio.N) {
-                if (plano[robotY -1][robotX] =='I') {
+                if (plano[robotY - 1][robotX] == 'I') {
                     //Si esta activat el inversor i troba un altre se desactivara i
                     // tornara al sentit normal
-                    if (inversor== true) {
+                    if (inversor == true) {
                         inversor = false;
-                    }else {
+                    } else {
                         //Si el inversor no esta activat el activam.
                         //Activa boolean inversor
                         inversor = true;
                     }
                 }
 
-                if (plano[robotY - 1][robotX] =='T') {
+                if (plano[robotY - 1][robotX] == 'T') {
                     //Troba un Transportador
                     //Avançam la posicio per entrar al transportador
                     robotY--;
@@ -195,17 +172,17 @@ public class Robot extends Bender {
             }
 
             if (direccio == Orientacio.W) {
-                if (plano[robotY][robotX -1] =='I') {
+                if (plano[robotY][robotX - 1] == 'I') {
                     if (inversor) {
                         inversor = false;
-                    }else {
+                    } else {
                         //Si el inversor no esta activat el activam.
                         //Activa boolean inversor
                         inversor = true;
                     }
                 }
                 //WEST
-                if (plano[robotY][robotX -1] =='T') {
+                if (plano[robotY][robotX - 1] == 'T') {
                     //Troba un Transportador
                     // Ja ha de estar creat i se ha de implementar una funcio que calculi la distancia
                     // amb el teorema de pitagoras
@@ -284,7 +261,7 @@ public class Robot extends Bender {
         return direccio;
     }
 
-    public Orientacio direccioInversa (char[][] plano, int iniciY, int iniciX, Orientacio direccio) {
+    public Orientacio direccioInversa(char[][] plano, int iniciY, int iniciX, Orientacio direccio) {
         // Si hi ha una paret a la seguent posicio, busca primer cap al sud
 
         //ordre N,W,S,E
