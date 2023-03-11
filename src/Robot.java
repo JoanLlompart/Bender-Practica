@@ -65,10 +65,6 @@ public class Robot extends Bender {
                     robotY++;
                     resultat += Orientacio.S.name();
                     viatgeAmbTransportador();
-                    // iniciY++;
-                    // resultat += Orientacio.S.name();
-                    //break;
-
                 }
                 // TROBA PARET
                 if (plano[robotY + 1][robotX] == '#') {
@@ -89,7 +85,6 @@ public class Robot extends Bender {
                     resultat += Orientacio.S.name();
                 }
             }
-
             if (direccio == Orientacio.E) {
                 if (plano[robotY][robotX + 1] == 'I') {
                     //Si esta activat el inversor i troba un altre se desactivara i
@@ -101,7 +96,7 @@ public class Robot extends Bender {
                         //Activa boolean inversor
                         inversor = true;
                     }
-                    ;
+
                 }
                 //EAST
                 if (plano[robotY][robotX + 1] == 'T') {

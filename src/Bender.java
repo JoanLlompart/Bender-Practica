@@ -55,17 +55,10 @@ public class Bender {
 
  */
     }
-    //Hem de pasar el mapa a array bidimensional
-
-    //per cada linea
-
-    //String[][] planol= new String[][]{mapa.split("\n")};
-
 
     // Constructor: ens passen el mapa en forma d'String
     public Bender(String mapa) {
         //ha de estar declarada com a variable de clase
-        //planol= new String[][]{mapa.split("\n")};
         String[] posicio = mapa.split("\n");
 
         int logitudMapa = posicio[0].length();
@@ -78,8 +71,8 @@ public class Bender {
             }
 
         }
-        int filasN = posicio.length;
-        int colN = posicio[0].length();
+        //determina la distancia de el planol per casos
+        // de mapas de longitut irregulars.
         plano = new char[posicio.length][logitudMapa];
 
 
@@ -103,7 +96,7 @@ public class Bender {
         }
 
  */
-        //Crear un mapa de items de les mateixes dimensions que el mapa de caracters
+
     }
 
 
