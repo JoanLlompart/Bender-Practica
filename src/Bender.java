@@ -4,8 +4,8 @@ public class Bender {
 
     // DECLAREM VARIABLES DE CLASE
     char[][] plano;
-    int iniciX = 0;
-    int iniciY = 0;
+    int robotX = 0;
+    int robotY = 0;
     int finalX = 0;
     int finalY = 0;
     int numTele = 0;
@@ -14,10 +14,10 @@ public class Bender {
     Transportador[] transportador;
 
     //Constructor que utilitza Robot i Item per heretar.
-    public Bender(int iniciX, int iniciY, int finalX, int finalY, String resultat, char[][] plano,int[][] cordTele,Transportador[] transportador) {
+    public Bender(int robotX, int robotY, int finalX, int finalY, String resultat, char[][] plano, int[][] cordTele, Transportador[] transportador) {
         this.plano = plano;
-        this.iniciX = iniciX;
-        this.iniciY = iniciY;
+        this.robotX = robotX;
+        this.robotY = robotY;
         this.finalX = finalX;
         this.finalY = finalY;
         this.resultat = resultat;
@@ -70,6 +70,7 @@ public class Bender {
         String[] posicio = mapa.split("\n");
 
         int logitudMapa = posicio[0].length();
+        //determinar la longitut de la fila mes curta del mapa
         for (int i = 0; i < posicio.length-1; i++) {
             if (logitudMapa > posicio[i + 1].length()) {
                 logitudMapa = posicio[i].length();
@@ -84,6 +85,7 @@ public class Bender {
 
 
         for (int i = 0; i < posicio.length; i++) {
+            //Un bucle per cada posicio de Y i el altre per X
             plano[i] = posicio[i].toCharArray();
         }
 
@@ -140,8 +142,6 @@ public class Bender {
         Transportador[] transportador = new Transportador[numTele];
         
          trobarItems(plano,cordInicial,cordFinal,cordTele);
-        //int[][] cordTeleT= trobarItems(plano, cordInicial,cordFinal,cordTele);
-         //cordTele = cordTeleT;
 
         //Bucle per crear els objectes Transportador,
         // i assignar valors x i y a cada transportador.
@@ -194,8 +194,8 @@ public class Bender {
 
         //int[][] cordTele = trobarItems(plano, cordInicial,cordFinal);
 
-        iniciX = cordInicial[0];
-        iniciY = cordInicial[1];
+        robotX = cordInicial[0];
+        robotY = cordInicial[1];
         finalX = cordFinal[0];
         finalY = cordFinal[1];
 
@@ -216,19 +216,7 @@ public class Bender {
         //String resultat="";
 
         //Cream el Robot i li pasa, les cordenades inicials.
-        Robot robot = new Robot(iniciX,iniciY,finalX,finalY,resultat,plano,cordTele,transportador);
-
-        System.out.println("X :" + iniciX + "| Y =  "+ iniciY);
-        System.out.println(" final X :" + finalX + "| final  Y =  "+ finalY);
-
-        int llargY = plano.length;
-        int llargX = plano[0].length;
-        System.out.println("Llarg de Y" + llargY  + " ||  Llarg de X :" + llargX );
-
-
-        System.out.println(Arrays.toString(cordInicial));
-
-
+        Robot robot = new Robot(robotX, robotY,finalX,finalY,resultat,plano,cordTele,transportador);
         return robot.walk();
     }
 
@@ -279,74 +267,6 @@ public class Bender {
         }
         //return cordTele;
     }
-
-    /*public Transportador trobaTeleProper(Transportador[] transportador, Transportador transportadorActual) {
-        double distanciaMinima = Double.MAX_VALUE;
-        Transportador transportadorMasCercano = null;
-
-        // Calcula la posición del transportador actual
-        double xActual = transportadorActual.getX();
-        double yActual = transportadorActual.getY();
-
-        // forEach hace referencia al arreglo de transportadores
-        for (Transportador t : transportador) {
-            if (t != transportadorActual) {
-                double distancia = calcularDistancia(t, transportadorActual);
-
-                if (distancia < distanciaMinima) {
-                    distanciaMinima = distancia;
-                    transportadorMasCercano = t;
-                } else if (distancia == distanciaMinima) {
-                    // Divide el plano en cuatro cuadrantes
-                    double x = t.getX();
-                    double y = t.getY();
-                    boolean isLeft = x < xActual;
-                    boolean isAbove = y < yActual;
-                    int cuadrante = isLeft ? (isAbove ? 2 : 1) : (isAbove ? 3 : 4);
-
-                    // Compara la distancia euclidiana en el sentido de las agujas del reloj
-                    double distanciaEuclidiana = calcularDistanciaEuclidiana(t, transportadorActual);
-                    double distanciaEuclidianaMasCercano = calcularDistanciaEuclidiana(transportadorMasCercano, transportadorActual);
-
-                    if (distanciaEuclidiana < distanciaEuclidianaMasCercano || (distanciaEuclidiana == distanciaEuclidianaMasCercano && cuadrante < getCuadrante(transportadorMasCercano, transportadorActual))) {
-                        transportadorMasCercano = t;
-                    }
-                }
-            }
-        }
-
-        return transportadorMasCercano;
-    }
-    private double calcularDistanciaEuclidiana(Transportador t1, Transportador t2) {
-        double x1 = t1.getX();
-        double y1 = t1.getY();
-        double x2 = t2.getX();
-        double y2 = t2.getY();
-
-        double dx = x2 - x1;
-        double dy = y2 - y1;
-
-        return Math.sqrt(dx * dx + dy * dy);
-    }
-    private int getCuadrante(Transportador t1, Transportador t2) {
-        double x1 = t1.getX();
-        double y1 = t1.getY();
-        double x2 = t2.getX();
-        double y2 = t2.getY();
-
-        boolean isLeft = x2 < x1;
-        boolean isAbove = y2 < y1;
-
-        if (isLeft) {
-            return isAbove ? 4 : 1;
-        } else {
-            return isAbove ? 3 : 2;
-        }
-    }
-
-
-
-     */
 
 /*
     public Transportador trobaTeleProper(Transportador[] transportador, Transportador transportadorActual) {
@@ -421,21 +341,6 @@ public Transportador trobaTeleProper(Transportador[] transportadores, Transporta
         double dy = yDestino - yActual;
         return dx != 0 ? dy / dx : Double.MAX_VALUE;
     }
-
-//---------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-    /*
-    private double calcularProdEucladia(Transportador t1, Transportador t2) {
-        double dx = t1.getX() - t2.getX();
-        double dy = t1.getY() - t2.getY();
-        return dx * dx + dy * dy;
-    }
-
-
-     */
-
 
     int bestRun() {
         return 0;
