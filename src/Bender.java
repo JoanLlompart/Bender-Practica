@@ -280,7 +280,7 @@ public class Bender {
         //return cordTele;
     }
 
-    public Transportador trobaTeleProper(Transportador[] transportador, Transportador transportadorActual) {
+    /*public Transportador trobaTeleProper(Transportador[] transportador, Transportador transportadorActual) {
         double distanciaMinima = Double.MAX_VALUE;
         Transportador transportadorMasCercano = null;
 
@@ -346,6 +346,8 @@ public class Bender {
 
 
 
+     */
+
 /*
     public Transportador trobaTeleProper(Transportador[] transportador, Transportador transportadorActual) {
         double distanciaMinima = Double.MAX_VALUE;
@@ -378,14 +380,49 @@ public class Bender {
 
  */
 
+
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+public Transportador trobaTeleProper(Transportador[] transportadores, Transportador transportadorActual) {
+    double distanciaMinima = Double.MAX_VALUE;
+    double ratioMinimo = Double.MAX_VALUE;
+    Transportador transportadorMasCercano = null;
+
+    // Calcula la posición del transportador actual
+    double xActual = transportadorActual.getX();
+    double yActual = transportadorActual.getY();
+
+    for (Transportador t : transportadores) {
+        if (t != transportadorActual) {
+            double distancia = calcularDistancia(t, transportadorActual);
+            double ratio = calcularRatio(xActual, yActual, t.getX(), t.getY());
+
+            if (distancia < distanciaMinima) {
+                distanciaMinima = distancia;
+                ratioMinimo = ratio;
+                transportadorMasCercano = t;
+            } else if (distancia == distanciaMinima && ratio < ratioMinimo) {
+                ratioMinimo = ratio;
+                transportadorMasCercano = t;
+            }
+        }
+    }
+
+    return transportadorMasCercano;
+}
+
     private double calcularDistancia(Transportador t1, Transportador t2) {
         double dx = t1.getX() - t2.getX();
         double dy = t1.getY() - t2.getY();
         //pitagores per comparar les distancies entre el transportador actual i els altres de el array.
         return Math.sqrt(dx * dx + dy * dy);
     }
+    private double calcularRatio(double xActual, double yActual, double xDestino, double yDestino) {
+        double dx = xDestino - xActual;
+        double dy = yDestino - yActual;
+        return dx != 0 ? dy / dx : Double.MAX_VALUE;
+    }
 
-
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
