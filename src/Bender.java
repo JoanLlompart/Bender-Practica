@@ -279,6 +279,74 @@ public class Bender {
         }
         //return cordTele;
     }
+
+    public Transportador trobaTeleProper(Transportador[] transportador, Transportador transportadorActual) {
+        double distanciaMinima = Double.MAX_VALUE;
+        Transportador transportadorMasCercano = null;
+
+        // Calcula la posición del transportador actual
+        double xActual = transportadorActual.getX();
+        double yActual = transportadorActual.getY();
+
+        // forEach hace referencia al arreglo de transportadores
+        for (Transportador t : transportador) {
+            if (t != transportadorActual) {
+                double distancia = calcularDistancia(t, transportadorActual);
+
+                if (distancia < distanciaMinima) {
+                    distanciaMinima = distancia;
+                    transportadorMasCercano = t;
+                } else if (distancia == distanciaMinima) {
+                    // Divide el plano en cuatro cuadrantes
+                    double x = t.getX();
+                    double y = t.getY();
+                    boolean isLeft = x < xActual;
+                    boolean isAbove = y < yActual;
+                    int cuadrante = isLeft ? (isAbove ? 2 : 1) : (isAbove ? 3 : 4);
+
+                    // Compara la distancia euclidiana en el sentido de las agujas del reloj
+                    double distanciaEuclidiana = calcularDistanciaEuclidiana(t, transportadorActual);
+                    double distanciaEuclidianaMasCercano = calcularDistanciaEuclidiana(transportadorMasCercano, transportadorActual);
+
+                    if (distanciaEuclidiana < distanciaEuclidianaMasCercano || (distanciaEuclidiana == distanciaEuclidianaMasCercano && cuadrante < getCuadrante(transportadorMasCercano, transportadorActual))) {
+                        transportadorMasCercano = t;
+                    }
+                }
+            }
+        }
+
+        return transportadorMasCercano;
+    }
+    private double calcularDistanciaEuclidiana(Transportador t1, Transportador t2) {
+        double x1 = t1.getX();
+        double y1 = t1.getY();
+        double x2 = t2.getX();
+        double y2 = t2.getY();
+
+        double dx = x2 - x1;
+        double dy = y2 - y1;
+
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+    private int getCuadrante(Transportador t1, Transportador t2) {
+        double x1 = t1.getX();
+        double y1 = t1.getY();
+        double x2 = t2.getX();
+        double y2 = t2.getY();
+
+        boolean isLeft = x2 < x1;
+        boolean isAbove = y2 < y1;
+
+        if (isLeft) {
+            return isAbove ? 4 : 1;
+        } else {
+            return isAbove ? 3 : 2;
+        }
+    }
+
+
+
+/*
     public Transportador trobaTeleProper(Transportador[] transportador, Transportador transportadorActual) {
         double distanciaMinima = Double.MAX_VALUE;
         Transportador transportadorMasCercano = null;
@@ -290,13 +358,14 @@ public class Bender {
                 if (distancia < distanciaMinima) {
                     distanciaMinima = distancia;
                     transportadorMasCercano = t;
-                } else if (distancia == distancia) {
+                }
+                if (distancia == distanciaMinima) {
                     //calcular distancia amb producte euclania que vagi en el sentit de les agulles de el rellotge
-                    double productoEuclidiano = calcularProductoEuclidiano(t, transportadorActual);
-                    double ratio = productoEuclidiano / (distancia * distancia);
-                    if (ratio < (calcularProductoEuclidiano(transportadorMasCercano, transportadorActual) / (distanciaMinima * distanciaMinima))) {
-                        transportadorMasCercano = t;
+                    for (int i = 0; i < transportador.length; i++) {
+                        //comparar x i segueix el ordre de el array per trobarlo.
+                      transportador[i].x = transportadorActual.x;
                     }
+
                 }
             }
         }
@@ -307,6 +376,8 @@ public class Bender {
     }
 
 
+ */
+
     private double calcularDistancia(Transportador t1, Transportador t2) {
         double dx = t1.getX() - t2.getX();
         double dy = t1.getY() - t2.getY();
@@ -314,11 +385,20 @@ public class Bender {
         return Math.sqrt(dx * dx + dy * dy);
     }
 
-    private double calcularProductoEuclidiano(Transportador t1, Transportador t2) {
+
+
+
+
+    /*
+    private double calcularProdEucladia(Transportador t1, Transportador t2) {
         double dx = t1.getX() - t2.getX();
         double dy = t1.getY() - t2.getY();
         return dx * dx + dy * dy;
     }
+
+
+     */
+
 
     int bestRun() {
         return 0;

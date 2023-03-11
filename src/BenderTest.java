@@ -210,7 +210,6 @@ public class BenderTest {
         assertEquals("SEENNNNNWWWWSSSS", bender.run());
     }
 
-   /*
     @Test
     public void test14() {
         // Irregular
@@ -229,8 +228,7 @@ public class BenderTest {
     }
 
 
-     */
-/*
+
     @Test
     public void test15() {
         // Impossible
@@ -246,7 +244,7 @@ public class BenderTest {
         Bender bender = new Bender(mapa);
         assertNull(bender.run());
     }
- */
+
     @Test
     public void test16() {
         String mapa = "" +

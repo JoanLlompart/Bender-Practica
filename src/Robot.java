@@ -59,10 +59,14 @@ public class Robot extends Bender {
         // Si el inversor esta activat altera el ordre de les prefrencias de direccio.
         //ordre Inversor N,W,S,E
         boolean inversor = false;
+
+        int contadorMaxIntents = 0;
         while (!haArribat) {
+
+            contadorMaxIntents++;
+            //S
+            if (contadorMaxIntents==10000) return null;
             // El probrama cada vegada que troba una paret ha de tornar a comensar el ordre cap el sur.
-
-
             if (direccio == Orientacio.S) {
                 //Si troba un inversor el la seguent casella
                 if (plano[iniciY + 1][iniciX] =='I') {
