@@ -80,23 +80,6 @@ public class Bender {
             //Un bucle per cada posicio de Y i el altre per X
             plano[i] = posicio[i].toCharArray();
         }
-
-       /* int filasN = posicio.length;
-        int colN = posicio[0].length();
-        plano = new char[filasN][colN];
-
-        */
-/*
-        //Rellena el Array amb els valors de el String
-        for (int Fila = 0; Fila < posicio.length; Fila++) {
-            for (int Col = 0; Col < posicio[Fila].length(); Col++) {
-                //Un bucle per cada posicio de Y i el altre per X
-                plano[Fila][Col] = posicio[Fila].charAt(Col);
-            }
-        }
-
- */
-
     }
 
 
@@ -209,41 +192,6 @@ public class Bender {
             }
         }
     }
-
-/*
-    public Transportador trobaTeleProper(Transportador[] transportador, Transportador transportadorActual) {
-        double distanciaMinima = Double.MAX_VALUE;
-        Transportador transportadorMasCercano = null;
-
-        // forEach fa referencia a el array de Transportador
-        for (Transportador t : transportador) {
-            if (t != transportadorActual) {
-                double distancia = calcularDistancia(t, transportadorActual);
-                if (distancia < distanciaMinima) {
-                    distanciaMinima = distancia;
-                    transportadorMasCercano = t;
-                }
-                if (distancia == distanciaMinima) {
-                    //calcular distancia amb producte euclania que vagi en el sentit de les agulles de el rellotge
-                    for (int i = 0; i < transportador.length; i++) {
-                        //comparar x i segueix el ordre de el array per trobarlo.
-                      transportador[i].x = transportadorActual.x;
-                    }
-
-                }
-            }
-        }
-        // Actualitza el transportador actual per el mes proper
-       // transportadorActual = transportadorMasCercano;
-
-        return transportadorMasCercano;
-    }
-
-
- */
-
-
-    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------
     public Transportador trobaTeleProper(Transportador[] transportadores, Transportador transportadorActual) {
         double distanciaMinima = Double.MAX_VALUE;
         double radiMenor = Double.MAX_VALUE;
