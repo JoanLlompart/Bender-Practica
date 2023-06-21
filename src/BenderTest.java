@@ -391,7 +391,7 @@ public class BenderTest {
     }
 
     @Test
-    public void test23() { //Per ara no el passa falta acabar teletransportador
+    public void test23() {
         String mapa = "" +
                 "###########\n" +
                 "#    X    #\n" +
